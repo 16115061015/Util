@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:FreshView="http://schemas.android.com/apk/res-auto"
+    xmlns:WaveView="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <com.hzy.cnn.CustomView.Ui.WavePlay
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#f2a5b7a7"
+        android:gravity="center"
+        android:text="波浪"
+        android:visibility="gone" />
+
+    <com.hzy.cnn.CustomView.Ui.WaveView
+        android:id="@+id/wv"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:visibility="gone"
+        WaveView:WaveHeight="100dp"
+        WaveView:WaveInitY="200dp"
+        WaveView:WaveWidth="200dp"
+        WaveView:color="#990d7fdd"
+        WaveView:duration="2000"
+        WaveView:flaotImageViewRadius="50dp"
+        WaveView:floatImageView="@mipmap/imagetouxiang"></com.hzy.cnn.CustomView.Ui.WaveView>
+
+    <com.hzy.cnn.CustomView.Ui.AlipaySuccessView
+        android:id="@+id/av"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#991c629f"
+        android:visibility="gone" />
+
+    <!--自带下拉刷新控件的测试-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:visibility="gone"></ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--自定义下拉刷新控件的测试-->
+    <com.hzy.cnn.CustomView.Ui.FreshView
+        android:id="@+id/fv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        FreshView:HeadRefreshView="@layout/headv"
+        FreshView:HeightOfView="100dp"
+        FreshView:LengthOfPullDown="200dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+
+                android:id="@+id/lv"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:background="#514e5c5c"
+                android:text="@string/test">
+
+            </TextView>
+        </ScrollView>
+
+
+    </com.hzy.cnn.CustomView.Ui.FreshView>
+
+</LinearLayout>
+

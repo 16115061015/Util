@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WaveView">
+        <!--圆的半径-->
+        <attr name="flaotImageViewRadius" format="dimension"></attr>
+        <!--浮动的图片-->
+        <attr name="floatImageView" format="reference"></attr>
+        <!--波浪初始化的高度-->
+        <attr name="WaveInitY" format="dimension"></attr>
+        <!--波浪的宽度-->
+        <attr name="WaveWidth" format="dimension"></attr>
+        <!--波浪的高度-->
+        <attr name="WaveHeight" format="dimension"></attr>
+        <!--波浪的颜色-->
+        <attr name="color" format="color"></attr>
+        <!--波浪快慢-->
+        <attr name="duration" format="integer"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="FreshView">
+        <!--下拉框的高度-->
+        <attr name="HeightOfView" format="dimension"/>
+        <!--下拉多少长度刷新-->
+        <attr name="LengthOfPullDown" format="dimension"/>
+        <!--刷新的头部-->
+        <attr name="HeadRefreshView" format="reference"/>
+        <!--刷新的底部-->
+        <attr name="DownRefreshView" format="reference"/>
+    </declare-styleable>
+</resources>
