@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 
-import com.hzy.cnn.waveview.R;
+import com.hzy.cnn.CustomView.R;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

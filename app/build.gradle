@@ -6,7 +6,7 @@ configurations.all {
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.hzy.cnn.waveview"
+        applicationId "com.hzy.cnn.CustomView"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1

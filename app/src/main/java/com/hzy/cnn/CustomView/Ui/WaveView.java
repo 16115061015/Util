@@ -18,10 +18,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.hzy.cnn.waveview.R;
+import com.hzy.cnn.CustomView.R;
 
 /**TODO
  //TODO
@@ -30,7 +32,15 @@ import com.hzy.cnn.waveview.R;
  * 带浮动View的波浪行View
  */
 
-public class WaveView extends View {
+public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
+
+
+
+    private SurfaceHolder surfaceHolder;
+    private Canvas canvas;
+    //子线程绘制标记
+    private volatile boolean isDrawing;
+
 
     //波浪的高度
     private float WaveHeight;
@@ -63,6 +73,13 @@ public class WaveView extends View {
     private int WaveViewWidth;
 
 
+    public WaveView(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, null);
+    }
+
+    public WaveView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        this(context, attrs, 0);
+    }
 
     public WaveView(Context context, @Nullable AttributeSet attrs) {
 
@@ -103,6 +120,9 @@ public class WaveView extends View {
 
         ImageViewBitmap=getCirleBitmap(DrawableToBitamp(drawable));
 
+        surfaceHolder = getHolder();
+        surfaceHolder.addCallback(this);
+        setFocusable(true);
     }
 
     private Bitmap DrawableToBitamp(Drawable drawable)
@@ -142,20 +162,12 @@ public class WaveView extends View {
                 //向左位移
                 float f= (float) animation.getAnimatedValue();
                 dx=WaveWidth*f;
-                postInvalidate();
             }
         });
         animator.start();
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        SetPathData();
-        canvas.drawBitmap(ImageViewBitmap,WaveViewWidth/2-HeadViewRadius*2,
-                iv_location[1]-HeadViewRadius*2,
-                paint);
-        canvas.drawPath(path,paint);
-    }
+
 
 
     //设置路径信息
@@ -222,4 +234,77 @@ public class WaveView extends View {
         return bt;
     }
 
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        synchronized (surfaceHolder) {
+            isDrawing = true;
+            new Thread(this).start();
+        }
+
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+        synchronized (surfaceHolder) {
+            isDrawing = false;
+            surfaceHolder.removeCallback(this);
+        }
+    }
+
+    @Override
+    public void run() {
+        while (isDrawing) {
+            draw();
+        }
+    }
+
+    private void draw() {
+        while (true) {
+           synchronized (surfaceHolder){
+               while(true){
+                   if(!isDrawing){
+                       return;
+                   }
+
+                   try {
+
+                       canvas = surfaceHolder.lockCanvas();
+                       //执行具体的绘制操
+                       SetPathData();
+                       if(canvas!=null) {
+                           canvas.drawColor(Color.TRANSPARENT);
+                           paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+                           canvas.drawPaint(paint);
+                           paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
+
+
+                           canvas.drawBitmap(ImageViewBitmap, WaveViewWidth / 2 - HeadViewRadius * 2,
+                                   iv_location[1] - HeadViewRadius * 2,
+                                   paint);
+                           canvas.drawPath(path, paint);
+                       }
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                   }finally {
+                       if (canvas != null) {
+                           surfaceHolder.unlockCanvasAndPost(canvas);
+                       }
+                   }
+                   try {
+                       Thread.sleep(16);
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+                   }
+               }
+           }
+        }
+
+
+    }
 }

@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.hzy.cnn.waveview.R;
+import com.hzy.cnn.CustomView.R;
 
 /**
  * 此刷新框架只能有一个子控件
