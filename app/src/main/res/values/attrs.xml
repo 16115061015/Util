@@ -17,6 +17,8 @@
         <attr name="duration" format="integer"></attr>
     </declare-styleable>
 
+
+
     <declare-styleable name="FreshView">
         <!--下拉框的高度-->
         <attr name="HeightOfView" format="dimension"/>
@@ -27,4 +29,12 @@
         <!--刷新的底部-->
         <attr name="DownRefreshView" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="WaveBubblesView">
+        <attr name="wave_height" format="float" />
+        <attr name="wave_speed" format="float" />
+        <attr name="wave_width" format="float" />
+        <attr name="wave_start_y" format="float" />
+    </declare-styleable>
+
 </resources>

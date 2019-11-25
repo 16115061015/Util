@@ -25,15 +25,12 @@ import android.view.animation.LinearInterpolator;
 
 import com.hzy.cnn.CustomView.R;
 
-/**TODO
- //TODO
- 可以采用SurfaceView去优化（未实现）
+/**
  * Created by 胡泽宇 on 2018/5/21.
  * 带浮动View的波浪行View
  */
 
-public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
-
+public class WaveView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
 
     private SurfaceHolder surfaceHolder;
@@ -52,7 +49,7 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
     //画出波浪的路径
     private Path path;
     //波浪移动一次的大小
-    private float dx=0;
+    private float dx = 0;
     //波浪的移动速度（一次的时间）
     private int duration;
 
@@ -63,7 +60,7 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
     //浮动图片的位置
     private float[] iv_location;
     //浮动图片先对与path起始点的位置
-    private  float dis;
+    private float dis;
     //头像的半径
     private float HeadViewRadius;
     private Bitmap ImageViewBitmap;
@@ -84,11 +81,12 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
     public WaveView(Context context, @Nullable AttributeSet attrs) {
 
         super(context, attrs);
-        init(context,attrs);
+        init(context, attrs);
 
     }
-    public WaveView(Context context){
-        this(context,null) ;
+
+    public WaveView(Context context) {
+        this(context, null);
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -97,20 +95,20 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
 //        WaveHeight= TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 50f, getResources().getDisplayMetrics());
 
         //获取属性值
-        paint=new Paint();
+        paint = new Paint();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WaveView);
-        WaveWidth=typedArray.getDimension(R.styleable.WaveView_WaveWidth, 600);
-        WaveHeight=typedArray.getDimension(R.styleable.WaveView_WaveHeight, 60);
-        WaveInitY=typedArray.getDimension(R.styleable.WaveView_WaveInitY, 200);
-        duration=typedArray.getInteger(R.styleable.WaveView_duration,2000);
-        HeadViewRadius=typedArray.getDimension(R.styleable.WaveView_flaotImageViewRadius, 120);
+        WaveWidth = typedArray.getDimension(R.styleable.WaveView_WaveWidth, 600);
+        WaveHeight = typedArray.getDimension(R.styleable.WaveView_WaveHeight, 60);
+        WaveInitY = typedArray.getDimension(R.styleable.WaveView_WaveInitY, 200);
+        duration = typedArray.getInteger(R.styleable.WaveView_duration, 2000);
+        HeadViewRadius = typedArray.getDimension(R.styleable.WaveView_flaotImageViewRadius, 120);
         paint.setColor(typedArray.getColor(R.styleable.WaveView_color, Color.BLUE));
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         Drawable drawable = typedArray.getDrawable(R.styleable.WaveView_floatImageView);
         typedArray.recycle();
 
-        path=new Path();
-        iv_location= new float[2];
+        path = new Path();
+        iv_location = new float[2];
 
 
         if (drawable == null) {//如果找不到图片资源，则从/res/drawble下面寻找图片资源
@@ -118,17 +116,15 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
             drawable = getContext().getResources().getDrawable(R.mipmap.ic_launcher_round);
         }
 
-        ImageViewBitmap=getCirleBitmap(DrawableToBitamp(drawable));
+        ImageViewBitmap = getCirleBitmap(DrawableToBitamp(drawable));
 
         surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
         setFocusable(true);
     }
 
-    private Bitmap DrawableToBitamp(Drawable drawable)
-    {
-        if (drawable instanceof BitmapDrawable)
-        {
+    private Bitmap DrawableToBitamp(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bd = (BitmapDrawable) drawable;
             return bd.getBitmap();
         }
@@ -160,61 +156,59 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 //向左位移
-                float f= (float) animation.getAnimatedValue();
-                dx=WaveWidth*f;
+                float f = (float) animation.getAnimatedValue();
+                dx = WaveWidth * f;
             }
         });
         animator.start();
     }
 
 
-
-
     //设置路径信息
     private void SetPathData() {
-        float halfWaveWidth=WaveWidth/2;
+        float halfWaveWidth = WaveWidth / 2;
         path.reset();
-        path.moveTo(-WaveWidth+dx,WaveHeight-WaveInitY+WaveViewHeight);
-        for(float i=-WaveWidth;i<WaveViewWidth+WaveWidth;i+=WaveWidth){
+        path.moveTo(-WaveWidth + dx, WaveHeight - WaveInitY + WaveViewHeight);
+        for (float i = -WaveWidth; i < WaveViewWidth + WaveWidth; i += WaveWidth) {
             //相对位置
-            path.rQuadTo(halfWaveWidth/2,-WaveHeight,halfWaveWidth,0);
-            path.rQuadTo(halfWaveWidth/2,WaveHeight,halfWaveWidth,0);
+            path.rQuadTo(halfWaveWidth / 2, -WaveHeight, halfWaveWidth, 0);
+            path.rQuadTo(halfWaveWidth / 2, WaveHeight, halfWaveWidth, 0);
         }
         //画矩形填充区域
-        path.lineTo(WaveViewWidth,WaveViewHeight);
-        path.lineTo(0,WaveViewHeight);
+        path.lineTo(WaveViewWidth, WaveViewHeight);
+        path.lineTo(0, WaveViewHeight);
         path.close();
 
         //获取wave在屏幕中心点的Y坐标,dis为距离起始点的位置
-        dis=WaveViewWidth/2+WaveWidth-dx;
-        PathMeasure p=new PathMeasure(path,false);
-        p.getPosTan(dis,iv_location,null);
+        dis = WaveViewWidth / 2 + WaveWidth - dx;
+        PathMeasure p = new PathMeasure(path, false);
+        p.getPosTan(dis, iv_location, null);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //获取大小
-        WaveViewHeight=MeasureSpec.getSize(heightMeasureSpec);
-        WaveViewWidth=MeasureSpec.getSize(widthMeasureSpec);
+        WaveViewHeight = MeasureSpec.getSize(heightMeasureSpec);
+        WaveViewWidth = MeasureSpec.getSize(widthMeasureSpec);
 
-        if(WaveInitY==0){
-            WaveInitY=WaveViewHeight;
+        if (WaveInitY == 0) {
+            WaveInitY = WaveViewHeight;
         }
 
     }
 
-    private  Bitmap getCirleBitmap(Bitmap bitmap) {
-        float scale=1.0f;
-        Matrix matrix=new Matrix();
+    private Bitmap getCirleBitmap(Bitmap bitmap) {
+        float scale = 1.0f;
+        Matrix matrix = new Matrix();
         //依据原有的图片丶创建一个新的图片   格式是：Config.ARGB_4444
         Bitmap bt = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_4444);
         //创建一个画布
         Canvas canvas = new Canvas(bt);
         //获取缩放比例
-        scale=HeadViewRadius*2/(Math.min(bitmap.getWidth(), bitmap.getHeight()));
+        scale = HeadViewRadius * 2 / (Math.min(bitmap.getWidth(), bitmap.getHeight()));
         //设置缩放比例
-        matrix.setScale(scale,scale);
+        matrix.setScale(scale, scale);
         canvas.setMatrix(matrix);
         //创建一个画笔
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -266,43 +260,43 @@ public class WaveView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     private void draw() {
         while (true) {
-           synchronized (surfaceHolder){
-               while(true){
-                   if(!isDrawing){
-                       return;
-                   }
+            synchronized (surfaceHolder) {
+                while (true) {
+                    if (!isDrawing) {
+                        return;
+                    }
 
-                   try {
+                    try {
 
-                       canvas = surfaceHolder.lockCanvas();
-                       //执行具体的绘制操
-                       SetPathData();
-                       if(canvas!=null) {
-                           canvas.drawColor(Color.TRANSPARENT);
-                           paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-                           canvas.drawPaint(paint);
-                           paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
+                        canvas = surfaceHolder.lockCanvas();
+                        //执行具体的绘制操
+                        SetPathData();
+                        if (canvas != null) {
+                            canvas.drawColor(Color.TRANSPARENT);
+                            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+                            canvas.drawPaint(paint);
+                            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
 
 
-                           canvas.drawBitmap(ImageViewBitmap, WaveViewWidth / 2 - HeadViewRadius * 2,
-                                   iv_location[1] - HeadViewRadius * 2,
-                                   paint);
-                           canvas.drawPath(path, paint);
-                       }
-                   } catch (Exception e) {
-                       e.printStackTrace();
-                   }finally {
-                       if (canvas != null) {
-                           surfaceHolder.unlockCanvasAndPost(canvas);
-                       }
-                   }
-                   try {
-                       Thread.sleep(16);
-                   } catch (InterruptedException e) {
-                       e.printStackTrace();
-                   }
-               }
-           }
+                            canvas.drawBitmap(ImageViewBitmap, WaveViewWidth / 2 - HeadViewRadius * 2,
+                                    iv_location[1] - HeadViewRadius * 2,
+                                    paint);
+                            canvas.drawPath(path, paint);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (canvas != null) {
+                            surfaceHolder.unlockCanvasAndPost(canvas);
+                        }
+                    }
+                    try {
+                        Thread.sleep(16);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
 
