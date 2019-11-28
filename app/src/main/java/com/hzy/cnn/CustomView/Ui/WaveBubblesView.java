@@ -21,7 +21,7 @@ import com.hzy.cnn.CustomView.R;
 /**
  * Author: huzeyu
  * Date: 2019/11/25
- * Description:
+ * Description:波浪水球动画--》可用于等级显示
  */
 public class WaveBubblesView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     private Path wavePath;
