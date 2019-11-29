@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -18,6 +19,7 @@ import android.view.View;
  */
 public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
+    private static final String TAG = "BezierDot";
     private Paint mPaint;
     private Path path = new Path();
     private static final float C = 0.552284749831f;     // 用来计算绘制圆形贝塞尔曲线控制点的位置的常数
@@ -38,6 +40,10 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     private int currentPosition = 0;
 
+    //贝塞尔曲线绘制点
+    private Point[] bezierPoint;
+    private Path bezierPath;
+
     public BezierDot(Context context) {
         this(context, null, 0);
     }
@@ -57,76 +63,125 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
 
-    }
-
-    private void SetData(Canvas canvas) {
-        if (viewPager == null || dotPosition == null) {
-            return;
+        bezierPoint = new Point[12];
+        for (int i = 0; i < 12; i++) {
+            bezierPoint[i] = new Point();
         }
-        //计算静态圆的半径
-        radius = getHeight() / 2 - 10;
-        //计算静态圆间距
-        dotPadding = (getWidth() - dotCount * 2 * radius) / (dotCount - 1);
-        dotPosition[0].set((int) radius, getHeight() / 2);
-
-        for (int i = 1; i < dotCount; i++) {
-            dotPosition[i].set((int) (dotPosition[i - 1].x + 2 * radius + dotPadding), getHeight() / 2);
-        }
-        for (int i = 0; i < dotCount; i++) {
-            if(i == currentPosition) {
-                mPaint.setStyle(Paint.Style.FILL);
-            }else{
-                mPaint.setStyle(Paint.Style.STROKE);
-            }
-            canvas.drawCircle(dotPosition[i].x, dotPosition[i].y, radius, mPaint);
-        }
+        bezierPath = new Path();
 
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
+    private void SetData() {
 
-//        canvas.translate(getWidth() / 2, getHeight() / 2);   // 将坐标系移动到画布中央
-
-        drawPath(canvas);
-
-        super.onDraw(canvas);
-    }
-
-
-    private void drawPath(Canvas canvas) {
-
-        SetData(canvas);
-        // 绘制贝塞尔曲线
-//        mPaint.setColor(Color.RED);
-//        mPaint.setStrokeWidth(6);
-//        path.moveTo(mData[0], mData[1]);
-//
-//        path.cubicTo(mCtrl[0], mCtrl[1], mCtrl[2], mCtrl[3], mData[2], mData[3]);
-//        path.cubicTo(mCtrl[4], mCtrl[5], mCtrl[6], mCtrl[7], mData[4], mData[5]);
-//        path.cubicTo(mCtrl[8], mCtrl[9], mCtrl[10], mCtrl[11], mData[6], mData[7]);
-//        path.cubicTo(mCtrl[12], mCtrl[13], mCtrl[14], mCtrl[15], mData[0], mData[1]);
-
-
-//        canvas.drawPath(path, mPaint);
-
-
-    }
-
-    public void bind(ViewPager viewPager) {
-        this.viewPager = viewPager;
         dotCount = viewPager.getAdapter().getCount();
         dotPosition = new Point[dotCount];
         for (int i = 0; i < dotCount; i++) {
             dotPosition[i] = new Point();
         }
+        //延时防止获取宽高为0
+        this.post(new Runnable() {
+            @Override
+            public void run() {
+                //计算静态圆的半径
+                radius = getHeight() / 2 - 10;
+                //计算静态圆间距
+                dotPadding = (getWidth() - dotCount * 2 * radius) / (dotCount - 1);
+                dotPosition[0].set((int) radius, getHeight() / 2);
+
+                for (int i = 1; i < dotCount; i++) {
+                    dotPosition[i].set((int) (dotPosition[i - 1].x + 2 * radius + dotPadding), getHeight() / 2);
+                }
+                invalidate();
+            }
+        });
+
+    }
+
+    /***
+     * 绘制静态圆形
+     * @param canvas
+     */
+    private void drawCircle(Canvas canvas) {
+        if (viewPager == null || dotPosition == null) {
+            return;
+        }
+        for (int i = 0; i < dotCount; i++) {
+            canvas.drawCircle(dotPosition[i].x, dotPosition[i].y, radius, mPaint);
+        }
+        drawBezier(canvas);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        drawCircle(canvas);
+        super.onDraw(canvas);
+    }
+
+
+    /***
+     * 绘制贝塞尔曲线
+     * 在数组保存的点中，其中p0,p3,p6,p9为圆的上下左右四个点
+     * @param canvas
+     */
+    private void drawBezier(Canvas canvas) {
+        bezierPath.reset();
+        int circleCenterX = dotPosition[currentPosition].x;
+        int circleCenterY = dotPosition[currentPosition].y;
+
+        //顶点
+        bezierPoint[0].x = circleCenterX;
+        bezierPoint[0].y = (int) (circleCenterY - radius);
+        //右点
+        bezierPoint[3].x = (int) (circleCenterX + radius);
+        bezierPoint[3].y = circleCenterY;
+        //底部点
+        bezierPoint[6].x = circleCenterX;
+        bezierPoint[6].y = (int) (circleCenterY + radius);
+        //左边点
+        bezierPoint[9].x = (int) (circleCenterX - radius);
+        bezierPoint[9].y = circleCenterY;
+
+        //贝塞尔锚点
+        bezierPoint[1].x = (int) (bezierPoint[0].x + C);
+        bezierPoint[1].y = bezierPoint[0].y;
+        bezierPoint[11].x = (int) (bezierPoint[0].x - C);
+        bezierPoint[11].y = bezierPoint[0].y;
+
+        bezierPoint[2].x = bezierPoint[3].x;
+        bezierPoint[2].y = (int) (bezierPoint[3].y - C);
+        bezierPoint[4].x = bezierPoint[3].x;
+        bezierPoint[4].y = (int) (bezierPoint[3].y + C);
+
+        bezierPoint[5].x = (int) (bezierPoint[6].x + C);
+        bezierPoint[5].y = bezierPoint[6].y;
+        bezierPoint[7].x = (int) (bezierPoint[6].x - C);
+        bezierPoint[7].y = bezierPoint[6].y;
+
+        bezierPoint[8].x = bezierPoint[9].x;
+        bezierPoint[8].y = (int) (bezierPoint[9].y + C);
+        bezierPoint[10].x = bezierPoint[9].x;
+        bezierPoint[10].y = (int) (bezierPoint[9].y - C);
+
+        bezierPath.moveTo(bezierPoint[0].x, bezierPoint[0].y);
+        bezierPath.cubicTo(bezierPoint[1].x, bezierPoint[1].y, bezierPoint[2].x, bezierPoint[2].y, bezierPoint[3].x, bezierPoint[3].y);
+        bezierPath.cubicTo(bezierPoint[4].x, bezierPoint[4].y, bezierPoint[5].x, bezierPoint[5].y, bezierPoint[6].x, bezierPoint[6].y);
+        bezierPath.cubicTo(bezierPoint[7].x, bezierPoint[7].y, bezierPoint[8].x, bezierPoint[8].y, bezierPoint[9].x, bezierPoint[9].y);
+        bezierPath.cubicTo(bezierPoint[10].x, bezierPoint[10].y, bezierPoint[11].x, bezierPoint[11].y, bezierPoint[0].x, bezierPoint[0].y);
+
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(bezierPath,mPaint);
+        mPaint.setStyle(Paint.Style.STROKE);
+    }
+
+    public void bind(ViewPager viewPager) {
+        this.viewPager = viewPager;
         viewPager.addOnPageChangeListener(this);
-        invalidate();
+        SetData();
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        Log.i(TAG, "onPageScrolled: " + positionOffset);
     }
 
     @Override

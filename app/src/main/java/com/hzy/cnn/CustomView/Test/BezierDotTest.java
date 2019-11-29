@@ -22,8 +22,8 @@ import java.util.List;
  * Description:BezierDot实现实例
  */
 public class BezierDotTest extends AppCompatActivity {
-    BezierDot bezierDot;
-    ViewPager viewPager;
+    private BezierDot bezierDot;
+    private ViewPager viewPager;
 
     //轮播数据集合
     private List<String> sourceDataSets;
@@ -46,13 +46,12 @@ public class BezierDotTest extends AppCompatActivity {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 ImageView imageView = new ImageView(BezierDotTest.this);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
                 Glide.with(BezierDotTest.this)
                         .load(sourceDataSets.get(position))
                         .into(imageView);
-                ViewGroup.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-                        , ViewGroup.LayoutParams.MATCH_PARENT);
-
-                imageView.setLayoutParams(params);
+                container.addView(imageView);
                 return imageView;
             }
 
