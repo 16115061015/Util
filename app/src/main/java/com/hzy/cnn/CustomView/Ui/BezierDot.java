@@ -128,6 +128,7 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
         int circleCenterX = dotPosition[currentPosition].x;
         int circleCenterY = dotPosition[currentPosition].y;
 
+        float mDifference = radius * C;
         //顶点
         bezierPoint[0].x = circleCenterX;
         bezierPoint[0].y = (int) (circleCenterY - radius);
@@ -142,34 +143,34 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
         bezierPoint[9].y = circleCenterY;
 
         //贝塞尔锚点
-        bezierPoint[1].x = (int) (bezierPoint[0].x + C);
+        bezierPoint[1].x = (int) (bezierPoint[0].x + mDifference);
         bezierPoint[1].y = bezierPoint[0].y;
-        bezierPoint[11].x = (int) (bezierPoint[0].x - C);
+        bezierPoint[11].x = (int) (bezierPoint[0].x - mDifference);
         bezierPoint[11].y = bezierPoint[0].y;
 
         bezierPoint[2].x = bezierPoint[3].x;
-        bezierPoint[2].y = (int) (bezierPoint[3].y - C);
+        bezierPoint[2].y = (int) (bezierPoint[3].y - mDifference);
         bezierPoint[4].x = bezierPoint[3].x;
-        bezierPoint[4].y = (int) (bezierPoint[3].y + C);
+        bezierPoint[4].y = (int) (bezierPoint[3].y + mDifference);
 
-        bezierPoint[5].x = (int) (bezierPoint[6].x + C);
+        bezierPoint[5].x = (int) (bezierPoint[6].x + mDifference);
         bezierPoint[5].y = bezierPoint[6].y;
-        bezierPoint[7].x = (int) (bezierPoint[6].x - C);
+        bezierPoint[7].x = (int) (bezierPoint[6].x - mDifference);
         bezierPoint[7].y = bezierPoint[6].y;
 
         bezierPoint[8].x = bezierPoint[9].x;
-        bezierPoint[8].y = (int) (bezierPoint[9].y + C);
+        bezierPoint[8].y = (int) (bezierPoint[9].y + mDifference);
         bezierPoint[10].x = bezierPoint[9].x;
-        bezierPoint[10].y = (int) (bezierPoint[9].y - C);
+        bezierPoint[10].y = (int) (bezierPoint[9].y - mDifference);
 
         bezierPath.moveTo(bezierPoint[0].x, bezierPoint[0].y);
+
         bezierPath.cubicTo(bezierPoint[1].x, bezierPoint[1].y, bezierPoint[2].x, bezierPoint[2].y, bezierPoint[3].x, bezierPoint[3].y);
         bezierPath.cubicTo(bezierPoint[4].x, bezierPoint[4].y, bezierPoint[5].x, bezierPoint[5].y, bezierPoint[6].x, bezierPoint[6].y);
         bezierPath.cubicTo(bezierPoint[7].x, bezierPoint[7].y, bezierPoint[8].x, bezierPoint[8].y, bezierPoint[9].x, bezierPoint[9].y);
         bezierPath.cubicTo(bezierPoint[10].x, bezierPoint[10].y, bezierPoint[11].x, bezierPoint[11].y, bezierPoint[0].x, bezierPoint[0].y);
-
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawPath(bezierPath,mPaint);
+        canvas.drawPath(bezierPath, mPaint);
         mPaint.setStyle(Paint.Style.STROKE);
     }
 
