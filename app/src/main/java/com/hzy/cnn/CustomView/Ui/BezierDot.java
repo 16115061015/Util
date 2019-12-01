@@ -21,7 +21,6 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = "BezierDot";
     private Paint mPaint;
-    private Path path = new Path();
     private static final float C = 0.552284749831f;     // 用来计算绘制圆形贝塞尔曲线控制点的位置的常数
 
 
@@ -43,6 +42,25 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
     //贝塞尔曲线绘制点
     private Point[] bezierPoint;
     private Path bezierPath;
+
+
+    //贝塞尔曲线右边坐标增量
+    private float rightIncremental = 0;
+    //贝塞尔曲线左边左边增量
+    private float leftIncremental = 0;
+    //贝塞尔曲线中心偏移量
+    private float centerIncremental = 0;
+    //贝塞尔上下点减量
+    private float incrementalOfUpAndDown = 0;
+
+    //下一个页面的position  onPageSelected会在onPageScrolled之前调用，所以要存值后在onPageScrollStateChanged滑动结束后设置
+    private int nextPosition;
+
+    private final int DIRECTION_LEFT = -1;
+    private final int DIRECTION_RIGHT = 1;
+
+    //当前viewpager的index
+    private int currentViewPagerIndex;
 
     public BezierDot(Context context) {
         this(context, null, 0);
@@ -125,21 +143,21 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
      */
     private void drawBezier(Canvas canvas) {
         bezierPath.reset();
-        int circleCenterX = dotPosition[currentPosition].x;
+        int circleCenterX = (int) (dotPosition[currentPosition].x + centerIncremental);
         int circleCenterY = dotPosition[currentPosition].y;
 
         float mDifference = radius * C;
         //顶点
         bezierPoint[0].x = circleCenterX;
-        bezierPoint[0].y = (int) (circleCenterY - radius);
+        bezierPoint[0].y = (int) (circleCenterY - radius + incrementalOfUpAndDown);
         //右点
-        bezierPoint[3].x = (int) (circleCenterX + radius);
+        bezierPoint[3].x = (int) (circleCenterX + radius + rightIncremental);
         bezierPoint[3].y = circleCenterY;
         //底部点
         bezierPoint[6].x = circleCenterX;
-        bezierPoint[6].y = (int) (circleCenterY + radius);
+        bezierPoint[6].y = (int) (circleCenterY + radius - incrementalOfUpAndDown);
         //左边点
-        bezierPoint[9].x = (int) (circleCenterX - radius);
+        bezierPoint[9].x = (int) (circleCenterX - radius - leftIncremental);
         bezierPoint[9].y = circleCenterY;
 
         //贝塞尔锚点
@@ -182,17 +200,103 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        Log.i(TAG, "onPageScrolled: " + positionOffset);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        currentPosition = position;
+        if (positionOffset == 0 || positionOffset == 1) return;
+        if (currentViewPagerIndex == position) {
+            //右
+            FirstStageOfMovement(positionOffset, DIRECTION_RIGHT);
+            if (positionOffset >= 0.2) {
+                SecondStageOfMovement(positionOffset, DIRECTION_RIGHT);
+            }
+            if (positionOffset >= 0.5) {
+                ThirdStageOfMovement(positionOffset, DIRECTION_RIGHT);
+            }
+        } else {
+            //左
+            FirstStageOfMovement(positionOffset, DIRECTION_LEFT);
+            if (positionOffset <= 0.8) {
+                SecondStageOfMovement(positionOffset, DIRECTION_LEFT);
+            }
+            if (positionOffset <= 0.5) {
+                ThirdStageOfMovement(positionOffset, DIRECTION_LEFT);
+            }
+        }
         invalidate();
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {
+    public void onPageSelected(int position) {
+        nextPosition = position;
+    }
 
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        if (state == 1) {
+            currentViewPagerIndex = viewPager.getCurrentItem();
+        } else if (state == 0) {
+            Log.i(TAG, "onPageScrollStateChanged: " + nextPosition);
+            resetPosition();
+            invalidate();
+        }
+
+
+    }
+
+    /***
+     * 0~1阶段贝塞尔右顶点坐标移动
+     * 0~0.5增长 0.5~1减小
+     * @param positionOffset
+     */
+    private void FirstStageOfMovement(float positionOffset, int Direction) {
+        if (Direction == DIRECTION_RIGHT) {
+            if (positionOffset >= 0.5) {
+                rightIncremental = ((radius * 2 + dotPadding) / 2) * ((1 - positionOffset) / 0.5f);
+            } else {
+                rightIncremental = ((radius * 2 + dotPadding) / 2) * (positionOffset / 0.5f);
+            }
+        } else {
+            positionOffset = 1 - positionOffset;
+            if (positionOffset >= 0.5) {
+                leftIncremental = ((radius * 2 + dotPadding) / 2) * ((1 - positionOffset) / 0.5f);
+            } else {
+                leftIncremental = ((radius * 2 + dotPadding) / 2) * (positionOffset / 0.5f);
+            }
+        }
+    }
+
+    /***
+     * 0.2~1阶段压缩上下两点坐标
+     * 0.2~0.6压缩
+     * 0.6~1恢复
+     * @param positionOffset
+     */
+    private void SecondStageOfMovement(float positionOffset, int Direction) {
+        if (Direction == DIRECTION_LEFT) positionOffset = 1 - positionOffset;
+        if (positionOffset >= 0.6) {
+            incrementalOfUpAndDown = radius / 2 * ((0.8f - (positionOffset - 0.2f)) / 0.4f);
+        } else {
+            incrementalOfUpAndDown = radius / 2 * ((positionOffset - 0.2f) / 0.4f);
+        }
+    }
+
+    /***
+     * 0.5~1阶段 贝塞尔中心坐标向右移动-->
+     * @param positionOffset
+     */
+    private void ThirdStageOfMovement(float positionOffset, int Direction) {
+        if (Direction == DIRECTION_LEFT) positionOffset = 1 - positionOffset;
+        centerIncremental = Direction * (radius * 2 + dotPadding) * ((positionOffset - 0.5f) / 0.5f);
+    }
+
+
+    private void resetPosition() {
+        //贝塞尔曲线右边坐标增量
+        rightIncremental = 0;
+        //贝塞尔曲线左边左边增量
+        leftIncremental = 0;
+        //贝塞尔曲线中心偏移量
+        centerIncremental = 0;
+        //贝塞尔上下点减量
+        incrementalOfUpAndDown = 0;
+        currentPosition = viewPager.getCurrentItem();
     }
 }
