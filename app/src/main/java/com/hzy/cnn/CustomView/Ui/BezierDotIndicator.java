@@ -17,7 +17,7 @@ import android.view.View;
  * Date: 2019/11/29
  * Description:ViewPager圆点指示器
  */
-public class BezierDot extends View implements ViewPager.OnPageChangeListener {
+public class BezierDotIndicator extends View implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = "BezierDot";
     private Paint mPaint;
@@ -35,7 +35,7 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
     //圆的半径
     private float radius;
 
-    private ViewPager viewPager;
+    protected ViewPager viewPager;
 
     private int currentPosition = 0;
 
@@ -53,8 +53,6 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
     //贝塞尔上下点减量
     private float incrementalOfUpAndDown = 0;
 
-    //下一个页面的position  onPageSelected会在onPageScrolled之前调用，所以要存值后在onPageScrollStateChanged滑动结束后设置
-    private int nextPosition;
 
     private final int DIRECTION_LEFT = -1;
     private final int DIRECTION_RIGHT = 1;
@@ -62,20 +60,28 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
     //当前viewpager的index
     private int currentViewPagerIndex;
 
-    public BezierDot(Context context) {
+
+    public void setBezierChange(boolean bezierChange) {
+        this.bezierChange = bezierChange;
+    }
+
+    //是否开启贝塞尔变化
+    private boolean bezierChange = true;
+
+    public BezierDotIndicator(Context context) {
         this(context, null, 0);
     }
 
-    public BezierDot(Context context, @Nullable AttributeSet attrs) {
+    public BezierDotIndicator(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BezierDot(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BezierDotIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs, defStyleAttr);
     }
 
-    private void initView(Context context, AttributeSet attrs, int defStyleAttr) {
+    protected void initView(Context context, AttributeSet attrs, int defStyleAttr) {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.RED);
@@ -91,7 +97,7 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     private void SetData() {
 
-        dotCount = viewPager.getAdapter().getCount();
+        dotCount = getItemCount();
         dotPosition = new Point[dotCount];
         for (int i = 0; i < dotCount; i++) {
             dotPosition[i] = new Point();
@@ -194,13 +200,13 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     public void bind(ViewPager viewPager) {
         this.viewPager = viewPager;
-        viewPager.addOnPageChangeListener(this);
+        this.viewPager.addOnPageChangeListener(this);
         SetData();
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (positionOffset == 0 || positionOffset == 1) return;
+        if (positionOffset == 0 || positionOffset == 1 || !bezierChange) return;
         if (currentViewPagerIndex == position) {
             //右
             FirstStageOfMovement(positionOffset, DIRECTION_RIGHT);
@@ -225,15 +231,14 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageSelected(int position) {
-        nextPosition = position;
+
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
         if (state == 1) {
-            currentViewPagerIndex = viewPager.getCurrentItem();
+            currentViewPagerIndex = getCurrentItem();
         } else if (state == 0) {
-            Log.i(TAG, "onPageScrollStateChanged: " + nextPosition);
             resetPosition();
             invalidate();
         }
@@ -297,6 +302,23 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
         centerIncremental = 0;
         //贝塞尔上下点减量
         incrementalOfUpAndDown = 0;
-        currentPosition = viewPager.getCurrentItem();
+        currentPosition = getCurrentItem();
     }
+
+    /***
+     * 获取viewpager当前显示页面的Item，子类可重写改变真实值
+     * @return
+     */
+    protected int getCurrentItem() {
+        return viewPager.getCurrentItem();
+    }
+
+    /***
+     * 获取ViewPager所有Item数量
+     * @return
+     */
+    protected int getItemCount() {
+        return viewPager.getAdapter().getCount();
+    }
+
 }

@@ -195,7 +195,7 @@ public class BannerView extends ViewPager {
         if (sourceDataSets != null) {
             //设置过渡界面
             this.sourceDataSets.addAll(sourceDataSets);
-            this.setCurrentItem(sourceDataSets.size()* 50, true);
+            this.setCurrentItem(sourceDataSets.size() * 50, true);
         }
     }
 
@@ -207,6 +207,23 @@ public class BannerView extends ViewPager {
         this.clickListener = clickListener;
     }
 
+    @Override
+    public int getCurrentItem() {
+        return super.getCurrentItem() % sourceDataSets.size();
+    }
+
+    /***
+     * 返回真实的数据集合数量
+     * @return
+     */
+    public int getItemCount() {
+        return sourceDataSets.size();
+    }
+
+    @Override
+    public void addOnPageChangeListener(OnPageChangeListener listener) {
+        super.addOnPageChangeListener(listener);
+    }
 
     interface ClickListener {
         void Click(int position);

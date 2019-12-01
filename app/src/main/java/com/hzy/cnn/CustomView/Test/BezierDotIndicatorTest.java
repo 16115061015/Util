@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.hzy.cnn.CustomView.R;
-import com.hzy.cnn.CustomView.Ui.BezierDot;
+import com.hzy.cnn.CustomView.Ui.BezierDotIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,8 @@ import java.util.List;
  * Date: 2019/11/29
  * Description:BezierDot实现实例
  */
-public class BezierDotTest extends AppCompatActivity {
-    private BezierDot bezierDot;
+public class BezierDotIndicatorTest extends AppCompatActivity {
+    private BezierDotIndicator bezierDotIndicator;
     private ViewPager viewPager;
 
     //轮播数据集合
@@ -33,7 +32,7 @@ public class BezierDotTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bezierdot_layout);
 
-        bezierDot = findViewById(R.id.bezierDot);
+        bezierDotIndicator = findViewById(R.id.bezierDot);
         viewPager = findViewById(R.id.viewPager);
 
         initData();
@@ -45,10 +44,10 @@ public class BezierDotTest extends AppCompatActivity {
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
-                ImageView imageView = new ImageView(BezierDotTest.this);
+                ImageView imageView = new ImageView(BezierDotIndicatorTest.this);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
-                Glide.with(BezierDotTest.this)
+                Glide.with(BezierDotIndicatorTest.this)
                         .load(sourceDataSets.get(position))
                         .into(imageView);
                 container.addView(imageView);
@@ -65,7 +64,7 @@ public class BezierDotTest extends AppCompatActivity {
                 return view == object;
             }
         });
-        bezierDot.bind(viewPager);
+        bezierDotIndicator.bind(viewPager);
     }
 
     private void initData() {

@@ -29,7 +29,10 @@
         <activity android:name=".Test.BannerViewTest" >
 
         </activity>
-        <activity android:name=".Test.BezierDotTest" >
+        <activity android:name=".Test.BezierDotIndicatorTest" >
+
+        </activity>
+        <activity android:name=".Test.BannerViewIndicatorTest" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
