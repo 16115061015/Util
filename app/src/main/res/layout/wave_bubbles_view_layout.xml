@@ -7,7 +7,7 @@
     android:background="#ffffff"
     android:gravity="center">
 
-    <com.hzy.cnn.CustomView.Ui.WaveBubblesView
+    <com.hzy.cnn.CustomView.Ui.view.WaveBubblesView
         android:layout_width="80dp"
         android:layout_height="80dp"
         apps:wave_height="20"

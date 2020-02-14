@@ -1,4 +1,4 @@
-package com.hzy.cnn.CustomView.Ui;
+package com.hzy.cnn.CustomView.Ui.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.hzy.cnn.CustomView.Ui.WavePlay
+    <com.hzy.cnn.CustomView.Ui.view.WavePlay
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

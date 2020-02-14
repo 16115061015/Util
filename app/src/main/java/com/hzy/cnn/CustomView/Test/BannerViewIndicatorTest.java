@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hzy.cnn.CustomView.R;
-import com.hzy.cnn.CustomView.Ui.BannerView;
-import com.hzy.cnn.CustomView.Ui.BannerViewIndicator;
+import com.hzy.cnn.CustomView.Ui.view.BannerView;
+import com.hzy.cnn.CustomView.Ui.view.BannerViewIndicator;
 
 import java.util.ArrayList;
 import java.util.List;

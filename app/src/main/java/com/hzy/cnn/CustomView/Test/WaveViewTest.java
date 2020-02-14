@@ -1,12 +1,10 @@
 package com.hzy.cnn.CustomView.Test;
 
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.hzy.cnn.CustomView.Ui.WaveView;
+import com.hzy.cnn.CustomView.Ui.view.WaveView;
 import com.hzy.cnn.CustomView.R;
 
 /**

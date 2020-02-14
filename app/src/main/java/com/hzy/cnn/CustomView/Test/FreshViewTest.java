@@ -1,14 +1,10 @@
 package com.hzy.cnn.CustomView.Test;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import com.hzy.cnn.CustomView.Ui.FreshView;
+import com.hzy.cnn.CustomView.Ui.view.FreshView;
 import com.hzy.cnn.CustomView.R;
 
 import java.util.ArrayList;

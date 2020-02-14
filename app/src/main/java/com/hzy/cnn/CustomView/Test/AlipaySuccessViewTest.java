@@ -1,10 +1,9 @@
 package com.hzy.cnn.CustomView.Test;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.hzy.cnn.CustomView.Ui.AlipaySuccessView;
+import com.hzy.cnn.CustomView.Ui.view.AlipaySuccessView;
 import com.hzy.cnn.CustomView.R;
 
 /**

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hzy.cnn.CustomView.Ui.WaveView
+    <com.hzy.cnn.CustomView.Ui.view.WaveView
         android:id="@+id/wv"
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -18,6 +18,6 @@
         WaveView:flaotImageViewRadius="50dp"
         WaveView:floatImageView="@mipmap/imagetouxiang">
 
-    </com.hzy.cnn.CustomView.Ui.WaveView>
+    </com.hzy.cnn.CustomView.Ui.view.WaveView>
 
 </LinearLayout>

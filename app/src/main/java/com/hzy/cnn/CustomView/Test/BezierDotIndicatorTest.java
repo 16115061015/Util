@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hzy.cnn.CustomView.R;
-import com.hzy.cnn.CustomView.Ui.BezierDotIndicator;
+import com.hzy.cnn.CustomView.Ui.view.BezierDotIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
