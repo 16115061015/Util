@@ -226,7 +226,7 @@ public class BezierDotIndicator extends View implements ViewPager.OnPageChangeLi
                 ThirdStageOfMovement(positionOffset, DIRECTION_LEFT);
             }
         }
-        invalidate();
+        postInvalidate();
     }
 
     @Override
@@ -240,7 +240,7 @@ public class BezierDotIndicator extends View implements ViewPager.OnPageChangeLi
             currentViewPagerIndex = getCurrentItem();
         } else if (state == 0) {
             resetPosition();
-            invalidate();
+            postInvalidate();
         }
 
 
