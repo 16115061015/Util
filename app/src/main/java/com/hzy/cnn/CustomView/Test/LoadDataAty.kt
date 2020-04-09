@@ -16,6 +16,7 @@ import com.hzy.cnn.CustomView.Ui.adapter.LoadDataAdapter
 import com.hzy.cnn.CustomView.Ui.view.LoadMoreDataView
 import com.hzy.cnn.CustomView.contract.DataEnrty
 import kotlinx.android.synthetic.main.aty_loaddata.*
+import kotlinx.coroutines.GlobalScope
 
 
 /**
@@ -82,7 +83,7 @@ open class LoadDataAty : AppCompatActivity() {
      * 加载数据
      */
     protected open fun loadData() {
-        Thread {
+        GlobalScope.run {
             var data = ArrayList<DataEnrty>()
             data.add(DataEnrty(1, "${dataIndex++}"))
             data.add(DataEnrty(2, "${dataIndex++}"))
@@ -91,7 +92,7 @@ open class LoadDataAty : AppCompatActivity() {
                 adapter.addData(data)
                 adapter.loadMoreComplete()
             }
-        }.start()
+        }
     }
 
     protected open fun getLoadMoreView(): LoadMoreView {
