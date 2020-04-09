@@ -1,9 +1,9 @@
 package com.hzy.cnn.CustomView.Utils;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by 胡泽宇 on 2018/8/11.
@@ -25,7 +25,7 @@ public class PermisionUtils {
      *
      * @param activity
      */
-    public static void verifyStoragePermissions(Activity activity) {
+    public static void verifyStoragePermissions(AppCompatActivity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
