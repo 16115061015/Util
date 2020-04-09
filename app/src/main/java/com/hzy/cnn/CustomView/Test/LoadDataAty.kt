@@ -1,6 +1,5 @@
 package com.hzy.cnn.CustomView.Test
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -8,12 +7,13 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieComposition
 import com.chad.library.adapter.base.loadmore.LoadMoreView
 import com.hzy.cnn.CustomView.R
 import com.hzy.cnn.CustomView.Ui.adapter.LoadDataAdapter
 import com.hzy.cnn.CustomView.Ui.view.LoadMoreDataView
+import com.hzy.cnn.CustomView.Ui.view.effect
 import com.hzy.cnn.CustomView.contract.DataEnrty
 import kotlinx.android.synthetic.main.aty_loaddata.*
 import kotlinx.coroutines.GlobalScope
@@ -34,9 +34,7 @@ open class LoadDataAty : AppCompatActivity() {
         initView()
         bindEvent()
         loadData()
-        btn.setOnClickListener {
-            checkIsAndroidO()
-        }
+
     }
 
     open fun checkIsAndroidO() {
@@ -45,8 +43,8 @@ open class LoadDataAty : AppCompatActivity() {
             if (b) {
                 installApk()
             } else { //请求安装未知应用来源的权限
-                var uri: Uri = Uri.parse("package:"+getPackageName())
-                var intent =  Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,uri)
+                var uri: Uri = Uri.parse("package:$packageName")
+                var intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, uri)
                 startActivityForResult(intent, 19900)
             }
         } else {
@@ -84,6 +82,7 @@ open class LoadDataAty : AppCompatActivity() {
      */
     protected open fun loadData() {
         GlobalScope.run {
+            //测试冲突
             var data = ArrayList<DataEnrty>()
             data.add(DataEnrty(1, "${dataIndex++}"))
             data.add(DataEnrty(2, "${dataIndex++}"))
