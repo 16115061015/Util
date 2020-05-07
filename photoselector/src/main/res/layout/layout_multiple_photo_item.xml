@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.sgxy.hzy.photoselector.recyclerview.SafetySimpleDraweeView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        fresco:fadeDuration="0"
+        fresco:placeholderImage="@drawable/shape_color_solid_f4"
+        fresco:placeholderImageScaleType="centerCrop"
+        fresco:viewAspectRatio="1" />
+
+    <FrameLayout
+        android:id="@+id/select_frame"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:id="@+id/tv_select"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:background="@drawable/selector_photo_selected_status"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvGif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/image"
+        android:layout_alignBottom="@+id/image"
+        android:layout_margin="0.5dp"
+        android:background="@drawable/gif_tag"
+        android:text="Gif"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/image"
+        android:layout_alignTop="@+id/image"
+        android:layout_alignRight="@+id/image"
+        android:layout_alignBottom="@+id/image"
+        android:background="#b3ffffff"
+        android:visibility="gone" />
+
+</RelativeLayout>

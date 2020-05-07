@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/flipper"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#000000"
+	android:measureAllChildren="false">
+	
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		
+		<androidx.camera.view.PreviewView
+			android:id="@+id/preview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="44dp"
+			android:layout_marginBottom="124dp" />
+		
+		<TextView
+			android:id="@+id/cancel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|start"
+			android:layout_marginStart="16dp"
+			android:layout_marginBottom="32dp"
+			android:gravity="center"
+			android:text="取消"
+			android:textColor="@color/white"
+			android:textSize="18sp" />
+		
+		<TextView
+			android:id="@+id/indicator"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center"
+			android:layout_marginBottom="96dp"
+			android:gravity="center"
+			android:text="照片"
+			android:textColor="#ffd21d"
+			android:textSize="14sp" />
+		
+		<View
+			android:id="@+id/shot"
+			android:layout_width="66dp"
+			android:layout_height="66dp"
+			android:layout_gravity="bottom|center_horizontal"
+			android:layout_marginBottom="16dp"
+			android:background="@drawable/shape_take_photo" />
+	</FrameLayout>
+	
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		
+		<ImageView
+			android:id="@+id/image"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="85dp"
+			android:layout_marginBottom="83dp"
+			android:contentDescription="@null"
+			android:scaleType="centerInside" />
+		
+		<TextView
+			android:id="@+id/reshot"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|start"
+			android:layout_marginStart="16dp"
+			android:layout_marginBottom="32dp"
+			android:gravity="center"
+			android:text="重拍"
+			android:textColor="@color/white"
+			android:textSize="18sp" />
+		
+		<TextView
+			android:id="@+id/use"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|end"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="32dp"
+			android:gravity="center"
+			android:text="使用照片"
+			android:textColor="@color/white"
+			android:textSize="18sp" />
+	</FrameLayout>
+</ViewFlipper>

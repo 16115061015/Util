@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hzy.cnn.CustomView">
-
+    <uses-sdk tools:overrideLibrary="androidx.camera.view,androidx.camera.camera2,androidx.camera.lifecycle,androidx.camera.core" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <application
@@ -50,6 +50,9 @@
 
         </activity>
         <activity android:name=".Test.AniamtionTest" >
+
+        </activity>
+        <activity android:name=".Test.PhotoSelectActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sgxy.hzy.photoselector.widget.photodraweeview.PhotoDraweeView
+        android:id="@+id/photo_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        fresco:placeholderImageScaleType="fitCenter" />
+
+<!--    <com.github.chrisbanes.photoview.PhotoView-->
+<!--        android:id="@+id/photo_pager_item_iv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+</RelativeLayout>

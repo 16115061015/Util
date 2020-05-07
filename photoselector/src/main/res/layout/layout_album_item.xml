@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="#ffffff"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dp">
+
+
+    <com.sgxy.hzy.photoselector.recyclerview.SafetySimpleDraweeView
+        android:id="@+id/img_album"
+        fresco:roundAsCircle="false"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:padding="0dp"
+        fresco:placeholderImage="@drawable/default_pic_s"
+        fresco:roundBottomLeft="true"
+        fresco:roundBottomRight="true"
+        fresco:roundTopLeft="true"
+        fresco:roundTopRight="true"
+        fresco:roundedCornerRadius="4dp" />
+
+    <RelativeLayout
+        android:id="@+id/info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/img_album"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_album_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="#566266"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_album_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txt_album_name"
+            android:layout_below="@id/txt_album_name"
+            android:layout_marginTop="5dp"
+            android:text="@string/app_name"
+            android:textColor="#B8C1C4"
+            android:textSize="11dp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_chosen"
+        android:layout_width="22dip"
+        android:layout_height="22dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerInside"
+        android:src="@drawable/pic_selected"
+        android:visibility="visible" />
+
+</RelativeLayout>

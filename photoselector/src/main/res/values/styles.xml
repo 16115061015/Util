@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomShowDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_to_current</item>
+        <item name="android:windowExitAnimation">@anim/current_to_bottom</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">#00000000</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/icon_photo_preview_unselect"
+        android:state_selected="false">
+    </item>
+    <item android:state_selected="true">
+        <shape android:shape="oval">
+            <solid android:color="#04C7B7" />
+        </shape>
+    </item>
+
+</selector>

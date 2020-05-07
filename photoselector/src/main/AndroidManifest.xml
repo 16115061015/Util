@@ -1,0 +1,22 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.sgxy.hzy.photoselector">
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-feature
+		android:name="android.hardware.camera"
+		android:required="false" />
+	<uses-feature
+		android:name="android.hardware.camera.front"
+		android:required="false" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<application>
+		<activity android:name="com.meelive.ingkee.photoselector2.preview.BasePreviewActivity" />
+		<activity android:name="com.meelive.ingkee.photoselector2.album.PhotoSelectorActivity" />
+		<activity android:name="com.meelive.ingkee.photoselector2.preview.PhotoPreviewActivity" />
+		<activity android:name="com.meelive.ingkee.photoselector2.crop.PhotoCropActivity" />
+		<activity
+			android:name="com.meelive.ingkee.photoselector2.camerax.CameraXActivity"
+			android:screenOrientation="portrait" />
+	</application>
+</manifest>

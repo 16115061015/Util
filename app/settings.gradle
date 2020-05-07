@@ -1,0 +1,4 @@
+include ':photoselector'
+
+
+project(':photoselector').projectDir = new File('/photoselector')
