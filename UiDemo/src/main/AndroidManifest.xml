@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.UiDemo">
+
+    <application>
+        <activity android:name="com.example.UiDemo.activity.AtyMotionLayout" />
+        <activity android:name=".activity.AtyAlipaySuccessView" />
+        <activity android:name=".activity.AtyFreshLayout" />
+        <activity android:name=".activity.AtyWaveView" />
+        <activity android:name=".activity.AtyWavePlay" />
+        <activity android:name=".activity.AtyWaveBubblesView" />
+        <activity android:name=".activity.AtyLabelLayout"/>
+        <activity android:name=".activity.AtyBannerView"/>
+        <activity android:name=".activity.AtyBezierDotIndicator"/>
+        <activity android:name=".activity.AtyBVH"/>
+    </application>
+</manifest>

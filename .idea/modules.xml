@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HzyVU.iml" filepath="$PROJECT_DIR$/HzyVU.iml" group="HzyVU" />
+      <module fileurl="file://$PROJECT_DIR$/UiDemo/UiDemo.iml" filepath="$PROJECT_DIR$/UiDemo/UiDemo.iml" group="HzyVU/UiDemo" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="HzyVU/app" />
-      <module fileurl="file://$PROJECT_DIR$/motionlayouttest/motionlayouttest.iml" filepath="$PROJECT_DIR$/motionlayouttest/motionlayouttest.iml" group="HzyVU/motionlayouttest" />
       <module fileurl="file://$PROJECT_DIR$/photoselector/photoselector.iml" filepath="$PROJECT_DIR$/photoselector/photoselector.iml" group="HzyVU/photoselector" />
     </modules>
   </component>

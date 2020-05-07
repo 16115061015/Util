@@ -2,57 +2,60 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hzy.cnn.CustomView">
+
     <uses-sdk tools:overrideLibrary="androidx.camera.view,androidx.camera.camera2,androidx.camera.lifecycle,androidx.camera.core" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <application
         android:name=".application.BaseApplication"
-        android:usesCleartextTraffic="true"
-        android:appComponentFactory="test"
-        android:networkSecurityConfig="@xml/network_security_config"
-        tools:replace="android:appComponentFactory"
         android:allowBackup="true"
+        android:appComponentFactory="test"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        >
-        <activity android:name="com.hzy.cnn.CustomView.Test.FreshViewTest" >
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
+        <activity android:name="com.hzy.cnn.CustomView.com.example.UiDemo.activity.FreshViewTest">
 
         </activity>
-        <activity android:name="com.hzy.cnn.CustomView.Test.AlipaySuccessViewTest" >
-
-        </activity>
-        <activity android:name="com.hzy.cnn.CustomView.Test.WavePlayTest" >
+        <activity android:name="com.hzy.cnn.CustomView.com.example.UiDemo.activity.AlipaySuccessViewTest">
 
         </activity>
 
-        <activity android:name="com.hzy.cnn.CustomView.Test.WaveViewTest" >
+        <activity android:name="com.hzy.cnn.CustomView.com.example.UiDemo.activity.WaveViewTest">
 
         </activity>
-        <activity android:name=".Test.WaveBubblesViewTest" >
+        <activity android:name="com.example.UiDemo.activity.AtyWaveBubblesView">
 
         </activity>
-        <activity android:name=".Test.BannerViewTest" >
+        <activity android:name="com.example.UiDemo.activity.AtyBannerView">
 
         </activity>
-        <activity android:name=".Test.BezierDotIndicatorTest" >
+        <activity android:name="com.example.UiDemo.activity.AtyBezierDotIndicator">
 
         </activity>
-        <activity android:name=".Test.BannerViewIndicatorTest" >
+        <activity android:name="com.example.UiDemo.activity.AtyBannerViewIndicator">
 
         </activity>
-        <activity android:name=".Test.LabelLayoutTest" >
+        <activity android:name="com.example.UiDemo.activity.AtyLabelLayout">
 
         </activity>
-        <activity android:name=".Test.LoadDataAty" >
+        <activity android:name=".activity.LoadDataAty">
 
         </activity>
-        <activity android:name=".Test.AniamtionTest" >
+        <activity android:name=".activity.AniamtionTest">
 
         </activity>
-        <activity android:name=".Test.PhotoSelectActivity" >
+        <activity android:name=".activity.PhotoSelectActivity">
+
+        </activity>
+
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

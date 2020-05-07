@@ -11,12 +11,13 @@
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<application>
-		<activity android:name="com.meelive.ingkee.photoselector2.preview.BasePreviewActivity" />
-		<activity android:name="com.meelive.ingkee.photoselector2.album.PhotoSelectorActivity" />
-		<activity android:name="com.meelive.ingkee.photoselector2.preview.PhotoPreviewActivity" />
-		<activity android:name="com.meelive.ingkee.photoselector2.crop.PhotoCropActivity" />
+		<activity android:name="com.sgxy.hzy.photoselector.preview.BasePreviewActivity" />
+		<activity android:name="com.sgxy.hzy.photoselector.album.PhotoSelectorActivity" />
+		<activity android:name="com.sgxy.hzy.photoselector.preview.PhotoPreviewActivity" />
+		<activity android:name="com.sgxy.hzy.photoselector.crop.PhotoCropActivity" />
 		<activity
-			android:name="com.meelive.ingkee.photoselector2.camerax.CameraXActivity"
+			android:name="com.sgxy.hzy.photoselector.camerax.CameraXActivity"
 			android:screenOrientation="portrait" />
+		<activity android:name=".util.PhotoSelectActivity"/>
 	</application>
 </manifest>
