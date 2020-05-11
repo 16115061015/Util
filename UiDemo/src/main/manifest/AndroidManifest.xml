@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.UiDemo">
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="test"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
+        <activity android:name="com.example.UiDemo.activity.AtyMotionLayout" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.AtyAlipaySuccessView" />
+        <activity android:name=".activity.AtyFreshLayout" />
+        <activity android:name=".activity.AtyWaveView" />
+        <activity android:name=".activity.AtyWavePlay" />
+        <activity android:name=".activity.AtyWaveBubblesView" />
+        <activity android:name=".activity.AtyLabelLayout"/>
+        <activity android:name=".activity.AtyBannerView"/>
+        <activity android:name=".activity.AtyBezierDotIndicator"/>
+        <activity android:name=".activity.AtyBVH"/>
+    </application>
+</manifest>

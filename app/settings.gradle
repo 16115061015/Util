@@ -1,5 +1,6 @@
 include ':photoselector'
 include ':motionlayout'
-
+include ':kotlindemo'
 project(':motionlayout').projectDir = new File('/motionlayout')
 project(':photoselector').projectDir = new File('/photoselector')
+project(':kotlindemo').projectDir = new File('/kotlindemo')

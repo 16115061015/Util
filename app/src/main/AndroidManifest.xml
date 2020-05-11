@@ -20,40 +20,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name="com.hzy.cnn.CustomView.com.example.UiDemo.activity.FreshViewTest">
-
-        </activity>
-        <activity android:name="com.hzy.cnn.CustomView.com.example.UiDemo.activity.AlipaySuccessViewTest">
-
-        </activity>
-
-        <activity android:name="com.hzy.cnn.CustomView.com.example.UiDemo.activity.WaveViewTest">
-
-        </activity>
-        <activity android:name="com.example.UiDemo.activity.AtyWaveBubblesView">
-
-        </activity>
-        <activity android:name="com.example.UiDemo.activity.AtyBannerView">
-
-        </activity>
-        <activity android:name="com.example.UiDemo.activity.AtyBezierDotIndicator">
-
-        </activity>
-        <activity android:name="com.example.UiDemo.activity.AtyBannerViewIndicator">
-
-        </activity>
-        <activity android:name="com.example.UiDemo.activity.AtyLabelLayout">
-
-        </activity>
-        <activity android:name=".activity.LoadDataAty">
-
-        </activity>
-        <activity android:name=".activity.AniamtionTest">
-
-        </activity>
-        <activity android:name=".activity.PhotoSelectActivity">
-
-        </activity>
 
         <activity android:name=".main.MainActivity">
             <intent-filter>

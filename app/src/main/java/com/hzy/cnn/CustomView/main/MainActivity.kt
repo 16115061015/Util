@@ -3,6 +3,7 @@ package com.hzy.cnn.CustomView.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.UiDemo.config.UiRouterConfig
+import com.example.kotlindemo.KotlinDemoConfig.KotlinDemoConfig
 import com.hzy.cnn.CustomView.R
 import com.hzy.cnn.CustomView.contract.Components
 import com.sgxy.hzy.photoselector.config.PSRouteConfig
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             setNewData(listOf(
                     Components("MotionLayout演示", UiRouterConfig.MotionLayout),
                     Components("支付效果", UiRouterConfig.AlipaySuccessView),
-                    // Components("Svg演示效果", MainRouterConfig.Lottie_SVGA_Demo),
                     Components("音乐波浪播放", UiRouterConfig.WavePlay),
                     Components("波浪头像", UiRouterConfig.WaveView),
                     Components("下拉刷新框架", UiRouterConfig.FreshLayout),
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                     Components("圆形指示器", UiRouterConfig.BezierDotIndicator),
                     Components("适配BannerView的指示器", UiRouterConfig.BannerViewIndicator),
                     Components("BVH框架使用", UiRouterConfig.BVH),
+                    Components("协程架构Demo", KotlinDemoConfig.Demo),
                     Components("图片选择器", PSRouteConfig.PhotoSelect)
             ))
             notifyDataSetChanged()

@@ -1,0 +1,17 @@
+apply from: "${rootProject.rootDir}/ConfigBuild.gradle"
+project.ext.LibConfig(project)
+android {
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //lifecycle协程库
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+}
