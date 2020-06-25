@@ -1,3 +1,4 @@
+include ':BaseRecycleView'
 include ':rollscreenview'
 include ':app', ':photoselector'
 include ':UiDemo'

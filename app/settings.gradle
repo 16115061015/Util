@@ -2,7 +2,9 @@ include ':photoselector'
 include ':motionlayout'
 include ':kotlindemo'
 include ':rollscreenview'
+include ':BaseRecycleView'
 project(':motionlayout').projectDir = new File('/motionlayout')
 project(':photoselector').projectDir = new File('/photoselector')
 project(':kotlindemo').projectDir = new File('/kotlindemo')
 project(':rollscreenview').projectDir = new File('/rollscreenview')
+project(':BaseRecycleView').projectDir = new File('/BaseRecycleView')
