@@ -17,6 +17,7 @@ dependencies {
         implementation project(':photoselector')
         implementation project(':UiDemo')
         implementation project(':kotlindemo')
+        implementation project(':rollscreenview')
     }
 
 

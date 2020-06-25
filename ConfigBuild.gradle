@@ -1,7 +1,7 @@
 project.ext {
     applicationId = "com.hzy.cnn.CustomView"
 //是否允许module单独调试
-    isModuleDebug = false
+    isModuleDebug = true
 
     //根据Module配置
     ApplicationConfig = {
@@ -107,6 +107,10 @@ project.ext {
             //BVH
             api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
 
+            //lifecycle协程库
+            implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+            implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha02"
+            implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 
             //ARouter
             api 'com.alibaba:arouter-api:1.4.1'

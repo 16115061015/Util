@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:appComponentFactory="test"
         android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity android:name="com.example.UiDemo.activity.AtyMotionLayout" >
