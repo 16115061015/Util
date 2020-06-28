@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.annotation.StringRes
@@ -17,32 +16,35 @@ import java.util.*
  * Time: 4:45 PM
  * Description: 滚动控件
  */
-class RollScreenLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : ViewFlipper(context, attrs) {
+class RollScreenLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
+        ViewFlipper(context, attrs) {
+    var dataChangesListener: () -> Unit = {
+        if (!isFlipping) startFlipping()
+    }
     var adapter: Adapter<*>? = null
         set(value) {
-            adapter?.dataChangesListener = {
-                showNext()
-            }
             field = value
-            showNext()
+            field?.dataChangesListener = dataChangesListener
+            startFlipping()
         }
 
     override fun showNext() {
-        adapter?.getNextItemView(this)?.let {
-            addView(it.itemView)
-            super.showNext()
-        }
+        val nextView = adapter?.getNextItemView(this)
+        if (adapter?.getDataSize() == 0) adapter?.loadMoreListener?.invoke()
+        if (nextView == null) return
+        addView(nextView.itemView)
+        super.showNext()
     }
 
 
     abstract class Adapter<T> {
         private val data = LinkedList<T>()
-        private val viewsCache = SparseArray<ViewHolder>()
-        var dataChangesListener: () -> Unit? = {}
-
+        private val viewsCache = SparseArray<Pair<ViewHolder?, ViewHolder?>>()
+        var dataChangesListener: (() -> Unit?)? = null
+        var loadMoreListener: (() -> Unit?)? = null
         fun setNewData(data: List<T>) {
             this.data.addAll(data)
-            dataChangesListener.invoke()
+            dataChangesListener?.invoke()
         }
 
         private fun onCreateViewHolder(vp: ViewGroup, data: T): ViewHolder? {
@@ -54,10 +56,10 @@ class RollScreenLayout @JvmOverloads constructor(context: Context, attrs: Attrib
         fun getNextItemView(vp: ViewGroup): ViewHolder? {
             if (data.isNullOrEmpty()) return null
             val data = data.poll()
-            var viewHolder = viewsCache.get(getItemType(data))
+            var viewHolder = getViewFromCache(getItemType(data))
             if (viewHolder == null) {
                 viewHolder = onCreateViewHolder(vp, data)
-                viewsCache.put(getItemType(data), viewHolder)
+                addViewToCache(getItemType(data), viewHolder)
             }
             viewHolder?.let {
                 viewHolder.itemView.parent?.let { (it as ViewGroup).removeView(viewHolder.itemView) }
@@ -69,6 +71,24 @@ class RollScreenLayout @JvmOverloads constructor(context: Context, attrs: Attrib
         open fun getItemType(data: T): Int = 0
 
         abstract fun convert(data: T, holder: ViewHolder)
+
+        private fun getViewFromCache(key: Int): ViewHolder? {
+            if (viewsCache.get(key) == null) return null
+            val (first, second) = viewsCache.get(key)
+            viewsCache.put(key, Pair(second, first))
+            return second
+        }
+
+        private fun addViewToCache(key: Int, viewHolder: ViewHolder?) {
+            if (viewsCache.get(key) == null) {
+                viewsCache.put(key, Pair(viewHolder, null))
+                return
+            }
+            val (_, second) = viewsCache.get(key)
+            viewsCache.put(key, Pair(viewHolder, second))
+        }
+
+        fun getDataSize() = data.size
     }
 
     class ViewHolder(var itemView: View) {

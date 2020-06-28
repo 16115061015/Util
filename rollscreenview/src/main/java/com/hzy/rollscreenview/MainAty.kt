@@ -19,10 +19,11 @@ class MainAty : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adapter = MainAdapter()
         rl.adapter = adapter
-        adapter.setNewData(mutableListOf(
-                DataBean(0, "123"),
-                DataBean(1, "abc"),
-                DataBean(0, "123")))
+        val data = mutableListOf<DataBean>()
+        for(index in 0..21){
+            data.add(DataBean(0, "index:$index"))
+        }
+        adapter.setNewData(data)
 
     }
 }
