@@ -2,6 +2,7 @@ package com.hzy.BVH.adapter
 
 import android.util.SparseArray
 import android.util.SparseIntArray
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -35,6 +36,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseVH>() {
         }
     }
 
+    fun getData() = datas
 
     abstract fun setLayout()
 
@@ -57,7 +59,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseVH {
         //创建
-        val view = View.inflate(parent.context, relationLayout.get(viewType), null)
+        val view = LayoutInflater.from(parent.context).inflate(relationLayout[viewType], parent, false)
         return BaseVH(view)
     }
 
