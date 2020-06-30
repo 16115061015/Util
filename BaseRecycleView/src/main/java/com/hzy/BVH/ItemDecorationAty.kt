@@ -27,7 +27,7 @@ class ItemDecorationAty : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adapter = MainAdapter()
         rv.adapter = adapter
-        rv.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.HORIZONTAL)
+        rv.layoutManager = StaggeredGridLayoutManager(4, RecyclerView.VERTICAL)
         rv.addItemDecoration(SpanItemDecoration(10, 10, 10, 10))
 
         adapter.addData(listOf(
@@ -80,23 +80,16 @@ class ItemDecorationAty : AppCompatActivity() {
          * 针对StaggeredGridLayoutManager的设置边距离
          */
         private fun getStaggeredGridHorizontalItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State, spanCount: Int, orientation: Int) {
+            val params = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
+            val spanIndex = params.spanIndex
+            val lastOfLine = spanIndex == spanCount - 1
             when (orientation) {
                 RecyclerView.HORIZONTAL -> {
-                    /**
-                     * 由于横向的StaggeredGridLayout排列是
-                     * 0 2 4
-                     * 1 3 5
-                     * 其中可以通过spanIndex获取是第几行 则每一行的最后一个可以通过等差数列得出第n个的index
-                     */
-                    val itemCount = parent.adapter?.itemCount ?: 0
-                    val currentCount = parent.getChildAdapterPosition(view)
-                    val horizontalSpanCount = (itemCount + 1) / spanCount //最后一项的n值
-                    val params = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
-                    val spanIndex = params.spanIndex // 首项值
-                    val lastOfLine = currentCount == params.spanIndex + 2 * (horizontalSpanCount - 1) || spanIndex == itemCount - 1
-                    outRect.set(left.dp, top.dp, if (lastOfLine) right.dp else 0, if (lastOfLine) bottom.dp else 0)
+                    outRect.set(left.dp, top.dp, 0, if (lastOfLine) bottom.dp else 0)
                 }
-                RecyclerView.VERTICAL -> getGridLayoutItemOffsets(outRect, view, parent, state, spanCount)
+                RecyclerView.VERTICAL -> {
+                    outRect.set(left.dp, top.dp, if (lastOfLine) right.dp else 0, 0)
+                }
             }
 
         }
