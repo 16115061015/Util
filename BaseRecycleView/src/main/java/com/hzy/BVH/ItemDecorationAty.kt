@@ -1,18 +1,14 @@
 package com.hzy.BVH
 
-import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.hzy.BVH.adapter.BaseAdapter
-import com.hzy.BVH.adapter.BaseVH
+import com.hzy.BVH.helper.dp
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -71,6 +67,7 @@ class ItemDecorationAty : AppCompatActivity() {
         private fun getGridLayoutItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State, spanCount: Int) {
             val itemCount = parent.adapter?.itemCount ?: 0
             val currentCount = parent.getChildAdapterPosition(view)
+            parent.childCount
             //每一行的最后一个View才需要添加right
             val lastOfLine = currentCount % spanCount == spanCount - 1 || currentCount == itemCount - 1
             outRect.set(left.dp, top.dp, if (lastOfLine) right.dp else 0, if (lastOfLine) bottom.dp else 0)
@@ -100,11 +97,5 @@ class ItemDecorationAty : AppCompatActivity() {
 }
 
 
-val Int.dp: Int
-    get() = android.util.TypedValue.applyDimension(
-            android.util.TypedValue.COMPLEX_UNIT_DIP,
-            this.toFloat(),
-            Resources.getSystem().displayMetrics
-    ).toInt()
 
 
