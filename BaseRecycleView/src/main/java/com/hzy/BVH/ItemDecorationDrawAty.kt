@@ -20,7 +20,7 @@ import kotlin.math.roundToInt
  * User: hzy
  * Date: 2020/6/30
  * Time: 2:52 PM
- * Description: 自定义ItemDecoration分割线绘制  暂时只支持LinearLayoutManager
+ * Description: 自定义ItemDecoration分割线绘制  粘性头部
  */
 class ItemDecorationDrawAty : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

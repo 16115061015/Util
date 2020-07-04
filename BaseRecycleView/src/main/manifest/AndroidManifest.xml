@@ -1,26 +1,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	package="com.hzy.BVH">
-	<application
-		android:allowBackup="true"
-		android:appComponentFactory="test"
-		android:supportsRtl="true"
-		android:theme="@style/Theme.AppCompat.DayNight"
-		android:usesCleartextTraffic="true"
-		tools:replace="android:appComponentFactory">
-		<activity android:name=".MainAty">
-		</activity>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hzy.BVH">
 
-		<activity android:name=".ItemTouchAty">
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="test"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".MainAty"></activity>
 
-		</activity>
-		<activity android:name=".ItemDecorationAty">
-		</activity>
-		<activity android:name=".ItemDecorationDrawAty">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"/>
-				<category android:name="android.intent.category.LAUNCHER"/>
-			</intent-filter>
-		</activity>
-	</application>
+        <activity android:name=".ItemTouchAty">
+
+        </activity>
+        <activity android:name=".ItemDecorationAty"></activity>
+        <activity android:name=".ItemDecorationDrawAty"></activity>
+
+        <activity android:name=".StickHeaderAty">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>
