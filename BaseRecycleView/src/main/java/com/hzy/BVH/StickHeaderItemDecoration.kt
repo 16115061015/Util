@@ -59,7 +59,7 @@ class StickHeaderItemDecoration(private val layoutId: Int, private val stickView
                 //先绑定数据再测量
                 transfer?.bindData(view, adapterPosition)
                 view.measure(child.measuredWidth, child.measuredHeight)
-                view.layout(left, top, right, bottom)
+                view.layout(left, 0, right, stickViewHeight.dp)
                 c.translate(0.toFloat(), top.toFloat())
                 view.draw(c)
                 c.translate(0.toFloat(), -top.toFloat())
@@ -79,12 +79,10 @@ class StickHeaderItemDecoration(private val layoutId: Int, private val stickView
         val right: Int = parent.width - parent.paddingRight
         val child = parent.getChildAt(0)
         val adapterPosition = parent.getChildAdapterPosition(child)
-        val bottom = getViewRealTop(child)
-        val top = bottom - stickViewHeight.dp
         //先绑定数据再测量
         transfer?.bindData(stickHeadView, adapterPosition)
         stickHeadView.measure(child.measuredWidth, child.measuredHeight)
-        stickHeadView.layout(left, top, right, bottom)
+        stickHeadView.layout(left, 0, right, stickViewHeight.dp)
         if (!beginTransfer(c, parent)) stickHeadView.draw(c)
 
     }
@@ -98,6 +96,7 @@ class StickHeaderItemDecoration(private val layoutId: Int, private val stickView
                 val top = getViewRealTop(view)
                 val distance = top + view.height
                 if (distance > stickViewHeight.dp) return false
+                //由于悬停布局需要覆盖到最后一个Item全部所以多移动一个的height高度
                 c.translate(0.toFloat(), (top - view.height).toFloat())
                 stickHeadView.draw(c)
                 c.translate(0.toFloat(), -(top - view.height).toFloat())
