@@ -14,7 +14,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     if (!project.ext.isModuleDebug) {
-        implementation project(':photoselector')
         implementation project(':UiDemo')
         implementation project(':kotlindemo')
         implementation project(':rollscreenview')

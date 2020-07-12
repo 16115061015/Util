@@ -9,10 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-/**
- * @作者: 姜志敏
- * @日期: 2019-10-26
- */
+
 public class ViewPagerFixed extends ViewPager {
 
     public ViewPagerFixed(@NonNull Context context) {

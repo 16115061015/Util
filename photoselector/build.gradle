@@ -1,6 +1,5 @@
 apply from: "${rootProject.rootDir}/ConfigBuild.gradle"
-apply plugin: 'maven-publish'
-apply plugin: 'maven'
+
 project.ext.LibConfig(project)
 android {
     buildTypes {

@@ -12,10 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-/**
- * @作者: 姜志敏
- * @日期: 2019-11-01
- */
+
 public abstract class BaseActivity extends FragmentActivity {
 
     @Override

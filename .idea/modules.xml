@@ -5,9 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BaseRecycleView/BaseRecycleView.iml" filepath="$PROJECT_DIR$/.idea/modules/BaseRecycleView/BaseRecycleView.iml" group="HzyVU/BaseRecycleView" />
       <module fileurl="file://$PROJECT_DIR$/HzyVU.iml" filepath="$PROJECT_DIR$/HzyVU.iml" group="HzyVU" />
       <module fileurl="file://$PROJECT_DIR$/UiDemo/UiDemo.iml" filepath="$PROJECT_DIR$/UiDemo/UiDemo.iml" group="HzyVU/UiDemo" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="HzyVU/app" />
       <module fileurl="file://$PROJECT_DIR$/kotlindemo/kotlindemo.iml" filepath="$PROJECT_DIR$/kotlindemo/kotlindemo.iml" group="HzyVU/kotlindemo" />
-      <module fileurl="file://$PROJECT_DIR$/photoselector/photoselector.iml" filepath="$PROJECT_DIR$/photoselector/photoselector.iml" group="HzyVU/photoselector" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/rollscreenview/rollscreenview.iml" filepath="$PROJECT_DIR$/.idea/modules/rollscreenview/rollscreenview.iml" group="HzyVU/rollscreenview" />
     </modules>
   </component>
