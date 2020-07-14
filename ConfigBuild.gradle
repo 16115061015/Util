@@ -1,7 +1,7 @@
 project.ext {
     applicationId = "com.hzy.cnn.CustomView"
 //是否允许module单独调试
-    isModuleDebug = true
+    isModuleDebug = false
 
     //根据Module配置
     ApplicationConfig = {
@@ -111,6 +111,15 @@ project.ext {
             implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
             implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha02"
             implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
+            //Fresco
+            implementation("com.facebook.fresco:fresco:2.1.0")
+            implementation("com.facebook.fresco:animated-gif:2.1.0")
+            implementation("com.facebook.fresco:animated-webp:2.1.0")
+            implementation("com.facebook.fresco:webpsupport:2.1.0")
+            implementation("com.facebook.fresco:imagepipeline-okhttp3:2.1.0") {
+                exclude module: "okhttp"
+            }
 
             //ARouter
             api 'com.alibaba:arouter-api:1.4.1'

@@ -24,7 +24,6 @@
         <activity android:name=".ItemDecorationDrawAty"></activity>
 
         <activity android:name=".StickHeaderAty">
-          ]
         </activity>
     </application>
 </manifest>

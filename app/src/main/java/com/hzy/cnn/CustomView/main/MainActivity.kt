@@ -6,7 +6,6 @@ import com.example.UiDemo.config.UiRouterConfig
 import com.example.kotlindemo.KotlinDemoConfig.KotlinDemoConfig
 import com.hzy.cnn.CustomView.R
 import com.hzy.cnn.CustomView.contract.Components
-import com.sgxy.hzy.photoselector.config.PSRouteConfig
 import kotlinx.android.synthetic.main.aty_main.*
 
 /**
@@ -36,8 +35,7 @@ class MainActivity : AppCompatActivity() {
                     Components("圆形指示器", UiRouterConfig.BezierDotIndicator),
                     Components("适配BannerView的指示器", UiRouterConfig.BannerViewIndicator),
                     Components("BVH框架使用", UiRouterConfig.BVH),
-                    Components("协程架构Demo", KotlinDemoConfig.Demo),
-                    Components("图片选择器", PSRouteConfig.PhotoSelect)
+                    Components("协程架构Demo", KotlinDemoConfig.Demo)
             ))
             notifyDataSetChanged()
         }
