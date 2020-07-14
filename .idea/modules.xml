@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AopDemo/AopDemo.iml" filepath="$PROJECT_DIR$/.idea/modules/AopDemo/AopDemo.iml" group="HzyVU/AopDemo" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BaseRecycleView/BaseRecycleView.iml" filepath="$PROJECT_DIR$/.idea/modules/BaseRecycleView/BaseRecycleView.iml" group="HzyVU/BaseRecycleView" />
       <module fileurl="file://$PROJECT_DIR$/HzyVU.iml" filepath="$PROJECT_DIR$/HzyVU.iml" group="HzyVU" />
       <module fileurl="file://$PROJECT_DIR$/UiDemo/UiDemo.iml" filepath="$PROJECT_DIR$/UiDemo/UiDemo.iml" group="HzyVU/UiDemo" />

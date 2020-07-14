@@ -1,7 +1,7 @@
 project.ext {
     applicationId = "com.hzy.cnn.CustomView"
 //是否允许module单独调试
-    isModuleDebug = false
+    isModuleDebug = true
 
     //根据Module配置
     ApplicationConfig = {
