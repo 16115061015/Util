@@ -1,3 +1,4 @@
+include ':AopDemo:buildSrc'
 include ':AopDemo'
 include ':BaseRecycleView'
 include ':rollscreenview'

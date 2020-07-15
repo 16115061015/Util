@@ -1,6 +1,6 @@
 apply from: "${rootProject.rootDir}/ConfigBuild.gradle"
 project.ext.ApplicationConfig(project)
-
+apply plugin: 'ConsumePlugin'
 
 android {
     buildTypes {
