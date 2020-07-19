@@ -1,5 +1,5 @@
 rootProject.name = 'HzyVu'
-includeBuild ("PluginModule")
+//includeBuild ("PluginModule")
 include ':AopDemo'
 include ':BaseRecycleView'
 include ':rollscreenview'
