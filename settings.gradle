@@ -1,8 +1,8 @@
 rootProject.name = 'HzyVu'
-//includeBuild ("PluginModule")
-include ':AopDemo'
-include ':BaseRecycleView'
-include ':rollscreenview'
 include ':app'
 include ':UiDemo'
 include ':kotlindemo'
+include ':AopDemo'
+include ':BaseRecycleView'
+include ':rollscreenview'
+//includeBuild ("PluginModule")

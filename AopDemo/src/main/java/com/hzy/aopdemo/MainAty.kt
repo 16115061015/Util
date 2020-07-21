@@ -3,7 +3,7 @@ package com.hzy.aopdemo
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.hzy.aopdemo.aop.ClickTrack
+import com.hzy.aopdemo.Track.ClickTrack
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

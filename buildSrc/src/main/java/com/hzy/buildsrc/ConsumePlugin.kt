@@ -1,5 +1,7 @@
 package com.hzy.buildsrc
 
+import com.android.build.gradle.AppExtension
+import com.hzy.buildsrc.ClickTrack.ClickTransform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -11,9 +13,9 @@ import org.gradle.api.Project
  */
 class ConsumePlugin : Plugin<Project> {
     override fun apply(pro: Project) {
-        pro.task("testTask").doLast {
-            println("task Test....")
-        }
+        //注入转化
+        val appExtension = pro.extensions.getByType(AppExtension::class.java)
+        appExtension.registerTransform(ClickTransform())
 
     }
 }

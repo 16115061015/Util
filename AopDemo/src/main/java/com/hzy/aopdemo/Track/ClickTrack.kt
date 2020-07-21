@@ -1,4 +1,4 @@
-package com.hzy.aopdemo.aop
+package com.hzy.aopdemo.Track
 
 /**
  * User: hzy
@@ -7,6 +7,6 @@ package com.hzy.aopdemo.aop
  * Description: 埋点注入AOP
  */
 @Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class ClickTrack {
 }
