@@ -17,6 +17,7 @@ dependencies {
         implementation project(':kotlindemo')
         implementation project(':rollscreenview')
         implementation project(':AopDemo')
+        implementation project(':okhttp')
     }
 
 

@@ -5,4 +5,5 @@ include ':kotlindemo'
 include ':AopDemo'
 include ':BaseRecycleView'
 include ':rollscreenview'
+include ':okhttp'
 //includeBuild ("PluginModule")
