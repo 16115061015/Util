@@ -1,9 +1,12 @@
 package com.hzy.okhttp
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
 
 /**
  * User: hzy
@@ -17,12 +20,31 @@ class MainAty : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tv.setOnClickListener {
-            onClick()
+            request()
         }
     }
 
-    private fun onClick() {
-        Toast.makeText(this, "cilck", Toast.LENGTH_SHORT).show()
+
+    private fun request() {
+        val client = OkHttpClient()
+        val request = Request.Builder().url("https://wanandroid.com/wxarticle/chapters/json").method("GET", null).build()
+        val call = client.newCall(request)
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                MainScope().launch {
+                    content.text = e.message
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val rs = response.message + "\n" + response.body?.string()
+                MainScope().launch {
+                    content.text = rs
+                }
+            }
+
+        })
     }
+
 }
 
