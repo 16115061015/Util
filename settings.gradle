@@ -7,4 +7,5 @@ include ':BaseRecycleView'
 include ':rollscreenview'
 include ':okhttp'
 include ':PermissionUtils'
+include ':Repository'
 //includeBuild ("PluginModule")

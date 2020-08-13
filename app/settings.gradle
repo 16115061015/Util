@@ -4,9 +4,13 @@ include ':kotlindemo'
 include ':AopDemo'
 include ':rollscreenview'
 include ':BaseRecycleView'
+include ':PermissionUtlis'
+include ':Repository'
 project(':motionlayout').projectDir = new File('/motionlayout')
 project(':photoselector').projectDir = new File('/photoselector')
 project(':kotlindemo').projectDir = new File('/kotlindemo')
 project(':rollscreenview').projectDir = new File('/rollscreenview')
 project(':BaseRecycleView').projectDir = new File('/BaseRecycleView')
 project(':AopDemo').projectDir = new File('/AopDemo')
+project(':PermissionUtlis').projectDir = new File('/PermissionUtlis')
+project(':Repository').projectDir = new File('/Repository')

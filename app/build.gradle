@@ -18,6 +18,8 @@ dependencies {
         implementation project(':rollscreenview')
         implementation project(':AopDemo')
         implementation project(':okhttp')
+        implementation project(':PermissionUtils')
+        implementation project(':Repository')
     }
 
 
