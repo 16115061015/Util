@@ -48,7 +48,6 @@ object PermissionUtils {
         val uri = Uri.fromParts("package", context.packageName, null)
         intent.data = uri
         findOrAddRequestFragment(context)?.startActivityForResult(intent,RequestFragment.REQ_PERMISSION)
-//        getInvisibleFragment().startActivityForResult(intent, InvisibleFragment.FORWARD_TO_SETTINGS)
     }
 
 }
