@@ -8,10 +8,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':RSA')
     if (!project.ext.isModuleDebug) {
         implementation project(':UiDemo')
         implementation project(':kotlindemo')
@@ -19,7 +21,7 @@ dependencies {
         implementation project(':AopDemo')
         implementation project(':okhttp')
         implementation project(':PermissionUtils')
-        implementation project(':Repository')
+//        implementation project(':Repository')
     }
 
 

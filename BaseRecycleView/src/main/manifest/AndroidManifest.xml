@@ -11,10 +11,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity android:name=".MainAty">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".ItemTouchAty">
@@ -23,7 +20,12 @@
         <activity android:name=".ItemDecorationAty"></activity>
         <activity android:name=".ItemDecorationDrawAty"></activity>
 
-        <activity android:name=".StickHeaderAty">
+        <activity android:name=".StickHeaderAty"></activity>
+        <activity android:name=".AutoPollAty">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>

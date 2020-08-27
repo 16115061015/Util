@@ -8,4 +8,5 @@ include ':rollscreenview'
 include ':okhttp'
 include ':PermissionUtils'
 include ':Repository'
+include ':RSA'
 //includeBuild ("PluginModule")

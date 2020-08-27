@@ -10,7 +10,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // objectbox
+        classpath "io.objectbox:objectbox-gradle-plugin:2.7.0"
     }
+
 
 
 }

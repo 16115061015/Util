@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * User: hzy
  * Date: 2020/6/25
  * Time: 4:27 PM
- * Description:
+ * Description: 数据仓库DEMO
  */
 class MainAty : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
