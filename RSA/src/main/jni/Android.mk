@@ -3,5 +3,5 @@ include $(CLEAR_VARS)
 
 LOCAL_LDLIBS += -llog
 LOCAL_MODULE := RSALib
-LOCAL_SRC_FILES =: Java_com_hzy_rsa_RSA_RSAUtils_rsaLock.cpp
+LOCAL_SRC_FILES =: RSAUtils.cpp
 include $(BUILD_SHARED_LIBRARY)
