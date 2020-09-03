@@ -10,10 +10,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity android:name=".activity.AtyMotionLayout" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".activity.AtyAlipaySuccessView" />
         <activity android:name=".activity.AtyFreshLayout" />
@@ -24,5 +21,11 @@
         <activity android:name=".activity.AtyBannerView"/>
         <activity android:name=".activity.AtyBezierDotIndicator"/>
         <activity android:name=".activity.AtyBVH"/>
+        <activity android:name=".activity.AtyDashBoardView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

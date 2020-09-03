@@ -3,12 +3,15 @@ package com.example.kotlindemo
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.liveData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.kotlindemo.KotlinDemoConfig.KotlinDemoConfig
 import com.hzy.rsa.RSA.RSAUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import rx.Single
 
 @Route(path = KotlinDemoConfig.Demo)
 class MainActivity : AppCompatActivity() {
@@ -56,4 +59,35 @@ class MainActivity : AppCompatActivity() {
             Success(result)
         }
     }
+
+
+    fun call(): Single<Boolean> {
+        return Single.create {
+            GlobalScope.launch {
+                val fun1Rs = async {
+                    fun1()
+                }
+                val fun2Rs = async(this.coroutineContext, CoroutineStart.LAZY) {
+                    fun2()
+                }
+                val fun3Rs = async(this.coroutineContext, CoroutineStart.LAZY) {
+                    fun3()
+                }
+                it.onSuccess(if (fun1Rs.await()) fun2Rs.await() else fun3Rs.await())
+            }
+        }
+    }
 }
+
+fun fun1(): Boolean {
+    return true
+}
+
+fun fun2(): Boolean {
+    return true
+}
+
+suspend fun fun3(): Boolean {
+    return true
+}
+
