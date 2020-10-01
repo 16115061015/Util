@@ -44,7 +44,7 @@ project.ext {
                     if (project.ext.isModuleDebug) {
                         //需要手动创建文件夹配置不同的清单文件，这个文件应该包含activity启动项
                         manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
-                    }else{
+                    } else {
                         //这个文件不能有启动项否则启动时会有多个app
                         manifest.srcFile 'src/main/AndroidManifest.xml'
                     }
@@ -94,15 +94,11 @@ project.ext {
         dependencies {
             implementation fileTree(dir: 'libs', include: ['*.jar'])
             //通用库
-            implementation 'androidx.appcompat:appcompat:1.1.0'
-            implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+            implementation 'androidx.appcompat:appcompat:1.2.0'
+            implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
             testImplementation 'junit:junit:4.13'
-            androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-            androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
             implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
             implementation 'androidx.recyclerview:recyclerview:1.1.0'
-            implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4'
-            implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4'
 
             //Rx
             implementation 'io.reactivex:rxjava:1.3.0'
@@ -112,8 +108,14 @@ project.ext {
 
             //lifecycle协程库
             implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-            implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha02"
+            implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha07"
             implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
+            //ktx 依赖
+            implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
+            implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7'
+            implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
+            implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.10"
 
             //Fresco
             implementation("com.facebook.fresco:fresco:2.1.0")

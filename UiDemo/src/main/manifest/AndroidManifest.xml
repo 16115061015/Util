@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.UiDemo">
-
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
     <application
         android:allowBackup="true"
         android:appComponentFactory="test"
@@ -22,11 +23,12 @@
         <activity android:name=".activity.AtyBezierDotIndicator"/>
         <activity android:name=".activity.AtyBVH"/>
         <activity android:name=".activity.AtyDashBoardView">
+        </activity>
+        <activity android:name=".activity.AtyNotification">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AtyNotification"/>
     </application>
 </manifest>

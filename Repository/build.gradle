@@ -3,7 +3,7 @@ project.ext.LibConfig(project)
 
 
 //objectbox 注意位置
-apply plugin: 'io.objectbox'
+//apply plugin: 'io.objectbox'
 android {
     buildTypes {
         release {
@@ -22,10 +22,10 @@ android {
 
 dependencies {
     //objectbox 引入
-    releaseImplementation "io.objectbox:objectbox-android:2.7.0"
-    implementation "io.objectbox:objectbox-kotlin:2.7.0"
-    debugImplementation "io.objectbox:objectbox-android-objectbrowser:2.5.1"
-    kapt "io.objectbox:objectbox-processor:2.7.0"
+//    releaseImplementation "io.objectbox:objectbox-android:2.7.0"
+//    implementation "io.objectbox:objectbox-kotlin:2.7.0"
+//    debugImplementation "io.objectbox:objectbox-android-objectbrowser:2.5.1"
+//    kapt "io.objectbox:objectbox-processor:2.7.0"
 
 //    releaseImplementation "io.objectbox:objectbox-android:2.7.0"
 //    debugImplementation "io.objectbox:objectbox-android-objectbrowser:2.7.0"

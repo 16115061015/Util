@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.hzy.BVH.adapter.BaseAdapter
 import com.hzy.BVH.adapter.BaseVH
+import com.hzy.BVH.layoutManager.GalleryLayoutManger
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

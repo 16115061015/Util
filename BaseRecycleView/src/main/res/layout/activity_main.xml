@@ -6,11 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainAty">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.hzy.BVH.recycleview.ScaleRecycleView
         android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.hzy.BVH.recycleview.GalleryRecyclerView
+        android:id="@+id/rv2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

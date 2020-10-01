@@ -17,11 +17,13 @@
         <activity android:name=".ItemTouchAty">
 
         </activity>
-        <activity android:name=".ItemDecorationAty"></activity>
-        <activity android:name=".ItemDecorationDrawAty"></activity>
+        <activity android:name=".ItemDecorationAty" />
+        <activity android:name=".ItemDecorationDrawAty" />
 
-        <activity android:name=".StickHeaderAty"></activity>
-        <activity android:name=".AutoPollAty">
+        <activity android:name=".StickHeaderAty" />
+        <activity android:name=".AutoPollAty"/>
+
+        <activity android:name=".GalleryLayoutAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
