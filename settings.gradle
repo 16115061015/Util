@@ -9,4 +9,5 @@ include ':okhttp'
 include ':PermissionUtils'
 include ':Repository'
 include ':RSA'
+include ':cocos2dPlay'
 //includeBuild ("PluginModule")

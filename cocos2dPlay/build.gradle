@@ -1,0 +1,37 @@
+apply from: "${rootProject.rootDir}/ConfigBuild.gradle"
+project.ext.LibConfig(project)
+android {
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    splits {  //只加载v7a架构包
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a'
+            universalApk false
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+}
+
+dependencies {
+    // spine 播放依赖库
+    implementation files('libs/cocos2dx.aar')
+
+    // leakcanary 内存泄露查看工具
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+
+}
