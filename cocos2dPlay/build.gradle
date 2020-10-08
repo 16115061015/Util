@@ -28,7 +28,7 @@ android {
 
 dependencies {
     // spine 播放依赖库
-    implementation files('libs/cocos2dx.aar')
+//    implementation files('libs/cocos2dx.aar')
 
     // leakcanary 内存泄露查看工具
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'

@@ -38,19 +38,16 @@ class PlaySpineAty : AppCompatActivity() {
     }
 
     override fun onResume() {
-        super.onResume()
         spine.onResume()
+        super.onResume()
     }
 
     override fun onPause() {
-        super.onPause()
         spine.onPause()
+        super.onPause()
     }
 
-    override fun onStop() {
-        super.onStop()
-        spine.onStop()
-    }
+
 
 
     override fun onDestroy() {

@@ -19,14 +19,8 @@ class SpineView(context: Context? = null, viewGroup: FrameLayout, contentHeight:
     var completeListener: (() -> Unit)? = null
 
     fun release() {
-        Cocos2dxHelper.uninit(this)
-        runOnGL {
-            SpineEventManager.ins().postEvent(SpineEventManager.CODE_CLEAR_CURRENT)
-        }
-        runOnGL(200) {
-            SpineEventManager.ins().postEvent(SpineEventManager.CODE_RELEASE)
-            doExitView()
-        }
+        mViewGroup?.handler?.removeCallbacksAndMessages(null)
+        doExitView()
         completeListener = null
     }
 
@@ -69,8 +63,5 @@ class SpineView(context: Context? = null, viewGroup: FrameLayout, contentHeight:
 
     override fun log(logString: String) {
         if (mViewGroup == null) return
-        mViewGroup.post {
-            Log.i("cocoslog from C++  %s", logString)
-        }
     }
 }

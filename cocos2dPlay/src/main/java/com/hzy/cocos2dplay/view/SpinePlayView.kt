@@ -1,15 +1,9 @@
 package com.hzy.cocos2dplay.view
 
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.util.AttributeSet
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.hzy.cocos2dplay.SpineManager
 import com.hzy.cocos2dplay.getScreenHeight
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
 /**
  * User: hzy
@@ -29,7 +23,6 @@ class SpinePlayView @JvmOverloads constructor(
             spineView.completeListener = value
         }
 
-    private val spineEventHandler = Handler(Looper.getMainLooper())
 
     private val spineView by lazy {
         SpineView(context, this, getScreenHeight(context))
@@ -38,7 +31,6 @@ class SpinePlayView @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         spineView
-        SpineManager.setView(this)
     }
 
     fun onResume() {
@@ -51,20 +43,10 @@ class SpinePlayView @JvmOverloads constructor(
     }
 
 
-    fun onStop() {
-        spineView.release()
-    }
-
-
     fun onDestroy() {
         spineView.release()
-        SpineManager.removeView(this)
         completeListener = null
-        spineEventHandler.removeCallbacksAndMessages(null)
-        MainScope().launch {
-            removeAllViews()
-        }
-
+        removeAllViews()
     }
 
     fun playSpine(filePath: String) {
