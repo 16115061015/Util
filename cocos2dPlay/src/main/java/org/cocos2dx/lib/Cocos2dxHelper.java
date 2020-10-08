@@ -14,10 +14,12 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Environment;
 import android.os.Process;
-import android.os.Build.VERSION;
 import android.preference.PreferenceManager.OnActivityResultListener;
+import android.util.Log;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class Cocos2dxHelper {
 
     public static void init(Context context, Cocos2dxHelper.Cocos2dxHelperListener listener) {
         sContext = context;
-        synchronized(lock) {
+        synchronized (lock) {
             listeners.add(listener);
         }
 
@@ -55,6 +57,7 @@ public class Cocos2dxHelper {
             sFileDirectory = sContext.getFilesDir().getAbsolutePath();
             nativeSetApkPath(getAssetsPath());
             sAssetManager = sContext.getAssets();
+            //TODO 这里可能有泄漏
             nativeSetContext(sContext, sAssetManager);
             sInited = true;
         }
@@ -64,8 +67,9 @@ public class Cocos2dxHelper {
     public static void uninit(Cocos2dxHelper.Cocos2dxHelperListener listener) {
         sInited = false;
         sContext = null;
-        synchronized(lock) {
+        synchronized (lock) {
             listeners.remove(listener);
+            Log.i("forTest", "helper uninit " + listener);
         }
     }
 
@@ -256,11 +260,11 @@ public class Cocos2dxHelper {
     }
 
     private static void showDialog(String pTitle, String pMessage) {
-        synchronized(lock) {
+        synchronized (lock) {
             Iterator var3 = listeners.iterator();
 
-            while(var3.hasNext()) {
-                Cocos2dxHelper.Cocos2dxHelperListener listener = (Cocos2dxHelper.Cocos2dxHelperListener)var3.next();
+            while (var3.hasNext()) {
+                Cocos2dxHelper.Cocos2dxHelperListener listener = (Cocos2dxHelper.Cocos2dxHelperListener) var3.next();
                 if (listener != null) {
                     listener.showDialog(pTitle, pMessage);
                 }
@@ -270,11 +274,11 @@ public class Cocos2dxHelper {
     }
 
     private static void animComplete(String filepathName) {
-        synchronized(lock) {
+        synchronized (lock) {
             Iterator var2 = listeners.iterator();
 
-            while(var2.hasNext()) {
-                Cocos2dxHelper.Cocos2dxHelperListener listener = (Cocos2dxHelper.Cocos2dxHelperListener)var2.next();
+            while (var2.hasNext()) {
+                Cocos2dxHelper.Cocos2dxHelperListener listener = (Cocos2dxHelper.Cocos2dxHelperListener) var2.next();
                 if (listener != null) {
                     listener.animComplete(filepathName);
                 }
@@ -284,11 +288,11 @@ public class Cocos2dxHelper {
     }
 
     private static void log(String logString) {
-        synchronized(lock) {
+        synchronized (lock) {
             Iterator var2 = listeners.iterator();
 
-            while(var2.hasNext()) {
-                Cocos2dxHelper.Cocos2dxHelperListener listener = (Cocos2dxHelper.Cocos2dxHelperListener)var2.next();
+            while (var2.hasNext()) {
+                Cocos2dxHelper.Cocos2dxHelperListener listener = (Cocos2dxHelper.Cocos2dxHelperListener) var2.next();
                 if (listener != null) {
                     listener.log(logString);
                 }
@@ -312,10 +316,10 @@ public class Cocos2dxHelper {
             if (value instanceof String) {
                 return Boolean.parseBoolean(value.toString());
             } else if (value instanceof Integer) {
-                int intValue = (Integer)value;
+                int intValue = (Integer) value;
                 return intValue != 0;
             } else if (value instanceof Float) {
-                float floatValue = (Float)value;
+                float floatValue = (Float) value;
                 return floatValue != 0.0F;
             } else {
                 return defaultValue;
@@ -335,10 +339,10 @@ public class Cocos2dxHelper {
             if (value instanceof String) {
                 return Integer.parseInt(value.toString());
             } else if (value instanceof Float) {
-                return ((Float)value).intValue();
+                return ((Float) value).intValue();
             } else {
                 if (value instanceof Boolean) {
-                    boolean booleanValue = (Boolean)value;
+                    boolean booleanValue = (Boolean) value;
                     if (booleanValue) {
                         return 1;
                     }
@@ -361,10 +365,10 @@ public class Cocos2dxHelper {
             if (value instanceof String) {
                 return Float.parseFloat(value.toString());
             } else if (value instanceof Integer) {
-                return ((Integer)value).floatValue();
+                return ((Integer) value).floatValue();
             } else {
                 if (value instanceof Boolean) {
-                    boolean booleanValue = (Boolean)value;
+                    boolean booleanValue = (Boolean) value;
                     if (booleanValue) {
                         return 1.0F;
                     }
@@ -376,7 +380,7 @@ public class Cocos2dxHelper {
     }
 
     public static double getDoubleForKey(String key, double defaultValue) {
-        return (double)getFloatForKey(key, (float)defaultValue);
+        return (double) getFloatForKey(key, (float) defaultValue);
     }
 
     public static String getStringForKey(String key, String defaultValue) {
@@ -414,7 +418,7 @@ public class Cocos2dxHelper {
     public static void setDoubleForKey(String key, double value) {
         SharedPreferences settings = sContext.getSharedPreferences("Cocos2dxPrefsFile", 0);
         Editor editor = settings.edit();
-        editor.putFloat(key, (float)value);
+        editor.putFloat(key, (float) value);
         editor.apply();
     }
 
