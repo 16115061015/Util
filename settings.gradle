@@ -10,4 +10,6 @@ include ':PermissionUtils'
 include ':Repository'
 include ':RSA'
 include ':cocos2dPlay'
+include ':LibgdxSpine'
+include ':gdx-backend-android'
 //includeBuild ("PluginModule")
