@@ -6,6 +6,8 @@
 package org.cocos2dx.lib;
 
 import android.opengl.GLSurfaceView.Renderer;
+import android.util.Log;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -18,11 +20,13 @@ public class Cocos2dxRenderer implements Renderer {
     private int mScreenHeight;
     private boolean mNativeInitCompleted = false;
 
+    private boolean release = false;
+
     public Cocos2dxRenderer() {
     }
 
     public static void setAnimationInterval(float animationInterval) {
-        sAnimationInterval = (long)(animationInterval * 1.0E9F);
+        sAnimationInterval = (long) (animationInterval * 1.0E9F);
     }
 
     public void setScreenWidthAndHeight(int surfaceWidth, int surfaceHeight) {
@@ -42,7 +46,8 @@ public class Cocos2dxRenderer implements Renderer {
 
 
     public void onDrawFrame(GL10 gl) {
-        if ((double)sAnimationInterval <= 1.6666666666666666E7D) {
+        Log.i("forTest","Renderer onDrawFrame onDrawFrame");
+        if ((double) sAnimationInterval <= 1.6666666666666666E7D) {
             nativeRender();
         } else {
             long now = System.nanoTime();
@@ -59,6 +64,7 @@ public class Cocos2dxRenderer implements Renderer {
         }
 
     }
+
 
     private static native void nativeTouchesBegin(int var0, float var1, float var2);
 

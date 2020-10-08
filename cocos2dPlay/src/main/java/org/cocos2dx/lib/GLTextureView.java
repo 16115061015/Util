@@ -62,6 +62,7 @@ public class GLTextureView extends TextureView implements SurfaceTextureListener
     }
 
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        Log.i("forTest","GLTextureView onSurfaceTextureDestroyed");
         this.setAlpha(0.0F);
         this.glThread.finish();
         this.glThread = null;
@@ -219,6 +220,7 @@ public class GLTextureView extends TextureView implements SurfaceTextureListener
                             needReRender = false;
                         }
                     }
+                    Log.i("forTest","GLTextureView finishGL");
                     this.finishGL();
                     return;
                 }
