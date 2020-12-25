@@ -53,7 +53,14 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseVH>() {
 
 
     fun addData(data: List<T>) {
+        val pre = this.datas.size
         this.datas.addAll(data)
+        notifyItemRangeChanged(pre, pre + data.size)
+    }
+
+
+    fun addData(index: Int, data: List<T>) {
+        this.datas.addAll(index, data)
         notifyDataSetChanged()
     }
 

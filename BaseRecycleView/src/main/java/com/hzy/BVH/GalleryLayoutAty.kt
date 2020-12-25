@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hzy.BVH.adapter.BaseAdapter
 import com.hzy.BVH.adapter.BaseVH
 import com.hzy.BVH.layoutManager.ScaleLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_gallery.*
 
 /**
  * User: hzy
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class GalleryLayoutAty : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_gallery)
         val adapter = GalleryAdapter()
         rv2.apply {
             setAlphaItem(true) //设置半透渐变

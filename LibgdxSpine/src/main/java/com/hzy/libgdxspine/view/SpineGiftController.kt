@@ -10,11 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.JsonReader
 import com.esotericsoftware.spine.*
 import com.hzy.libgdxspine.MApplication
-import com.hzy.libgdxspine.getScreenHeight
 import com.hzy.libgdxspine.getScreenWidth
 import java.io.File
-import kotlin.math.max
-import kotlin.math.min
 
 
 /**
@@ -26,7 +23,6 @@ class SpineGiftController : ApplicationListener, AnimationState.AnimationStateLi
 
     var completeListener: (() -> Unit)? = null
 
-    var sizeChange: ((Float, Float) -> Unit)? = null
 
     @Volatile
     private var hasDispose = false
@@ -78,8 +74,6 @@ class SpineGiftController : ApplicationListener, AnimationState.AnimationStateLi
             return
         }
         var spine: Pair<TextureAtlas, SkeletonData>? = null
-        var scale = 0f
-        Log.i("forTest", "屏幕 宽${getScreenWidth(MApplication.globalContext)}  高 ${getScreenHeight(MApplication.globalContext)}")
         try {
             if (atlasCache.containsKey(spinePath)) {
                 spine = atlasCache[spinePath]
@@ -99,8 +93,7 @@ class SpineGiftController : ApplicationListener, AnimationState.AnimationStateLi
                     val sJson = SkeletonJson(atlas)
                     val paintSize = readSkeletonSize(Gdx.files.absolute(json.absolutePath))
                     Log.i("forTest", "缩放前的宽 ${paintSize.first}  缩放后的高 ${paintSize.second}")
-                    sJson.scale = (max(getScreenWidth(MApplication.globalContext) / paintSize.first, getScreenHeight(MApplication.globalContext) / paintSize.second))
-                    scale = sJson.scale
+                    sJson.scale = 1.66f
                     val sData = sJson.readSkeletonData(Gdx.files.absolute(json.absolutePath))
                     Log.i("forTest", "缩放后的宽 ${sData.width * sJson.scale}  缩放后的高 ${sData.height * sJson.scale}")
                     spine = Pair(atlas, sData)
@@ -123,7 +116,7 @@ class SpineGiftController : ApplicationListener, AnimationState.AnimationStateLi
             // 设置位置
             currentSkeleton?.setPosition(
                     getScreenWidth(MApplication.globalContext) / 2.toFloat(),
-                    0f)
+                    20f)
             currentState?.addListener(this)
             isPlaying = true
         } catch (e: Exception) {
@@ -149,7 +142,7 @@ class SpineGiftController : ApplicationListener, AnimationState.AnimationStateLi
     override fun render() {
         if (beginToStart) starPlaySpine(spinePath)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-        Gdx.gl.glClearColor(0f, 0f, 0f, 0f)
+//        Gdx.gl.glClearColor(0f, 0f, 0f, 0f)
         if (hasDispose || !isPlaying) return
         // 动画控制器更新时间步
         currentState?.update(Gdx.graphics.deltaTime)

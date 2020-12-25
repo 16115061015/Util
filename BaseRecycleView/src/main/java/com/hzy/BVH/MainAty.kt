@@ -6,11 +6,15 @@ import android.view.MotionEvent
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hzy.BVH.adapter.BaseAdapter
 import com.hzy.BVH.adapter.BaseVH
 import com.hzy.BVH.layoutManager.GalleryLayoutManger
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * User: hzy
@@ -24,32 +28,30 @@ class MainAty : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adapter = MainAdapter()
         rv.adapter = adapter
+        val layoutManger = LinearLayoutManager(this)
+        rv.layoutManager = layoutManger
         adapter.addData(listOf(
-                DataBean("123", 0),
-                DataBean("456", 1),
-                DataBean("789", 1),
-                DataBean("dasd", 1),
-                DataBean("fadasd", 0)))
-        rv.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
-            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-            }
+                DataBean("1"),
+                DataBean("2"),
+                DataBean("3"),
+                DataBean("4"),
+                DataBean("5")))
+        layoutManger.stackFromEnd = adapter.getData().size < 5
 
-            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                //点击时缩小
-                val childView = rv.findChildViewUnder(e.x, e.y)
-                if (e.action == ACTION_DOWN) {
-                    childView?.scaleY = 0.8F
-                } else {
-                    childView?.scaleY = 1F
-                }
-                return false
-            }
+        window.decorView.post {
+            adapter.addData(listOf(
+                    DataBean("6"),
+                    DataBean("7"),
+                    DataBean("8"),
+                    DataBean("9"),
+                    DataBean("10")))
+            layoutManger.stackFromEnd = adapter.getData().size < 5
+//            MainScope().launch {
+//                delay(500)
+//                rv.scrollToPosition(adapter.itemCount - 1)
+//            }
+        }
 
-            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-
-            }
-
-        })
     }
 
 }

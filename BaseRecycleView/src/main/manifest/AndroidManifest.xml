@@ -24,6 +24,12 @@
         <activity android:name=".AutoPollAty"/>
 
         <activity android:name=".GalleryLayoutAty">
+
+        </activity>
+
+        <activity android:name=".ImAty"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

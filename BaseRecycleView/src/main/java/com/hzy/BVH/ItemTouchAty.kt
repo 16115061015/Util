@@ -17,10 +17,10 @@ import java.util.*
  * Time: 4:27 PM
  * Description: 使用ItemTouchHelperDemo
  */
-val helper by lazy {
+private val helper by lazy {
     ItemTouchHelper(TouchCallBack())
 }
-val adapter = TouchAdapter()
+private val adapter = TouchAdapter()
 
 class ItemTouchAty : AppCompatActivity() {
 
